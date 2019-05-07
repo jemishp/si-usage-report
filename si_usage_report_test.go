@@ -5,6 +5,10 @@ import (
 	. "github.com/jpatel-pivotal/si-usage-report"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
+	"github.com/onsi/gomega/gbytes"
+	"github.com/onsi/gomega/gexec"
+	"io"
+	"os/exec"
 )
 
 var _ = Describe("SiUsageReport", func() {
@@ -13,6 +17,8 @@ var _ = Describe("SiUsageReport", func() {
 		expectedPluginVersion plugin.VersionType
 		expectedCLIVersion    plugin.VersionType
 		expectedCommand       plugin.Command
+		outBuffer             io.Writer
+		errBuffer             io.Writer
 	)
 	BeforeEach(func() {
 		subject = new(BasicPlugin)
@@ -33,6 +39,8 @@ var _ = Describe("SiUsageReport", func() {
 				Usage: "si-usage-report\n   cf si-usage-report",
 			},
 		}
+		outBuffer = gbytes.NewBuffer()
+		errBuffer = gbytes.NewBuffer()
 	})
 	When("GetMetaData() is called", func() {
 		It("returns the correct name for the plugin", func() {
@@ -49,9 +57,14 @@ var _ = Describe("SiUsageReport", func() {
 			Expect(subject.GetMetadata().Commands[0]).To(Equal(expectedCommand))
 		})
 	})
-	When("cf si-usage-report is run", func() {
+	When("cf si-usage-report is run without installing the plugin", func() {
+		subject.Run(nil, []string{"si-usage-report"})
 		It("prints a success message", func() {
-
+			args := []string{"si-usage-report"}
+			session, err := gexec.Start(exec.Command("cf", args...), outBuffer, errBuffer)
+			session.Wait()
+			Expect(err).NotTo(HaveOccurred())
+			Expect(outBuffer).To(gbytes.Say("'si-usage-report' is not a registered command. See 'cf help'"))
 		})
 	})
 
