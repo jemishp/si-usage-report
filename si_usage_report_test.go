@@ -13,7 +13,7 @@ import (
 
 var _ = Describe("SiUsageReport", func() {
 	var (
-		subject               *BasicPlugin
+		subject               *SIUsageReport
 		expectedPluginVersion plugin.VersionType
 		expectedCLIVersion    plugin.VersionType
 		expectedCommand       plugin.Command
@@ -21,7 +21,7 @@ var _ = Describe("SiUsageReport", func() {
 		errBuffer             io.Writer
 	)
 	BeforeEach(func() {
-		subject = new(BasicPlugin)
+		subject = new(SIUsageReport)
 		expectedPluginVersion = plugin.VersionType{
 			Major: 1,
 			Minor: 0,
@@ -59,12 +59,12 @@ var _ = Describe("SiUsageReport", func() {
 	})
 	When("cf si-usage-report is run without installing the plugin", func() {
 		subject.Run(nil, []string{"si-usage-report"})
-		It("prints a success message", func() {
+		It("prints the usage message", func() {
 			args := []string{"si-usage-report"}
 			session, err := gexec.Start(exec.Command("cf", args...), outBuffer, errBuffer)
 			session.Wait()
 			Expect(err).NotTo(HaveOccurred())
-			Expect(outBuffer).To(gbytes.Say("'si-usage-report' is not a registered command. See 'cf help'"))
+			Expect(outBuffer).To(gbytes.Say("'si-usage-report' is not a registered command. See 'cf help -a'"))
 		})
 	})
 

@@ -5,9 +5,9 @@ import (
 	"fmt"
 )
 
-type BasicPlugin struct{}
+type SIUsageReport struct{}
 
-func (c *BasicPlugin) Run(cliConnection plugin.CliConnection, args []string) {
+func (c *SIUsageReport) Run(cliConnection plugin.CliConnection, args []string) {
 	// Ensure that we called the command basic-plugin-command
 	switch args[0] {
 	case "si-usage-report":
@@ -15,7 +15,7 @@ func (c *BasicPlugin) Run(cliConnection plugin.CliConnection, args []string) {
 	}
 }
 
-func (c *BasicPlugin) GetMetadata() plugin.PluginMetadata {
+func (c *SIUsageReport) GetMetadata() plugin.PluginMetadata {
 	return plugin.PluginMetadata{
 		Name: "SIUsageReport",
 		Version: plugin.VersionType{
@@ -41,5 +41,5 @@ func (c *BasicPlugin) GetMetadata() plugin.PluginMetadata {
 }
 
 func main() {
-	plugin.Start(new(BasicPlugin))
+	plugin.Start(new(SIUsageReport))
 }
