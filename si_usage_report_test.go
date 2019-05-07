@@ -2,6 +2,7 @@ package main_test
 
 import (
 	"code.cloudfoundry.org/cli/plugin"
+	"code.cloudfoundry.org/cli/plugin/pluginfakes"
 	. "github.com/jpatel-pivotal/si-usage-report"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
@@ -19,9 +20,12 @@ var _ = Describe("SiUsageReport", func() {
 		expectedCommand       plugin.Command
 		outBuffer             io.Writer
 		errBuffer             io.Writer
+		fakeCLIConnection *pluginfakes.FakeCliConnection
 	)
 	BeforeEach(func() {
 		subject = new(SIUsageReport)
+		fakeCLIConnection = &pluginfakes.FakeCliConnection{}
+		subject.CliConnection = fakeCLIConnection
 		expectedPluginVersion = plugin.VersionType{
 			Major: 1,
 			Minor: 0,
@@ -58,7 +62,8 @@ var _ = Describe("SiUsageReport", func() {
 		})
 	})
 	When("cf si-usage-report is run without installing the plugin", func() {
-		subject.Run(nil, []string{"si-usage-report"})
+		//subject.Run(nil, []string{"si-usage-report"})
+		subject.GetSIUsageReport([]string{"test"})
 		It("prints the usage message", func() {
 			args := []string{"si-usage-report"}
 			session, err := gexec.Start(exec.Command("cf", args...), outBuffer, errBuffer)
@@ -67,5 +72,13 @@ var _ = Describe("SiUsageReport", func() {
 			Expect(outBuffer).To(gbytes.Say("'si-usage-report' is not a registered command. See 'cf help -a'"))
 		})
 	})
+	//When("GetSIUsageReport is called", func() {
+	//	var out []string
+	//	out, err = subject.ApiHelper.CliCommand("")
+	//	It("prints a message", func() {
+	//		Expect(err).To(BeNil())
+	//		Expect(out).To(Equal("Running the si-usage-report with args:"))
+	//	})
+	//})
 
 })
