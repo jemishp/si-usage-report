@@ -10,7 +10,6 @@ import (
 	"os"
 )
 
-
 var _ = Describe("SiUsageReport", func() {
 	Describe("Setup", func() {
 		var (
@@ -34,6 +33,19 @@ var _ = Describe("SiUsageReport", func() {
 				orgs, err := apiHelper.GetOrgs()
 				Expect(err).NotTo(HaveOccurred())
 				Expect(len(orgs)).To(Equal(2))
+			})
+		})
+		When("no orgs exist", func() {
+			var orgsJSON []string
+
+			BeforeEach(func() {
+				orgsJSON = getResponse("test-data/no-orgs.json")
+				fakeClientConnection.CliCommandWithoutTerminalOutputReturns(orgsJSON, nil)
+			})
+			It("should return an error", func() {
+				orgs, err := apiHelper.GetOrgs()
+				Expect(err).To(MatchError("CF API returned no output"))
+				Expect(len(orgs)).To(Equal(0))
 			})
 		})
 	})
