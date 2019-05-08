@@ -3,6 +3,7 @@ package cfapihelper_test
 import (
 	"bufio"
 	"code.cloudfoundry.org/cli/plugin/pluginfakes"
+	"errors"
 	"fmt"
 	"github.com/jpatel-pivotal/si-usage-report/cfapihelper"
 	. "github.com/onsi/ginkgo"
@@ -84,6 +85,17 @@ var _ = Describe("SiUsageReport", func() {
 		BeforeEach(func() {
 			fakeClientConnection = &pluginfakes.FakeCliConnection{}
 			apiHelper = cfapihelper.New(fakeClientConnection)
+		})
+		When("really bad error occurs", func() {
+			BeforeEach(func() {
+				fakeClientConnection.CliCommandWithoutTerminalOutputReturns(nil,
+					errors.New("really bad error"))
+			})
+			It("should return an error", func() {
+				returned, err := apiHelper.GetOrgs()
+				Expect(err).To(MatchError("really bad error"))
+				Expect(len(returned)).To(Equal(0))
+			})
 		})
 		When("no orgs exist", func() {
 			var orgsJSON []string
