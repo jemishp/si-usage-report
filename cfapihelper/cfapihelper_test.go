@@ -10,19 +10,6 @@ import (
 	"os"
 )
 
-func getResponse(filename string) []string {
-	var b []string
-	file, err := os.Open(filename)
-	if err != nil {
-		fmt.Println(err.Error())
-	}
-	defer file.Close()
-	scanner := bufio.NewScanner(file)
-	for scanner.Scan() {
-		b = append(b, scanner.Text())
-	}
-	return b
-}
 
 var _ = Describe("SiUsageReport", func() {
 	Describe("Setup", func() {
@@ -51,3 +38,17 @@ var _ = Describe("SiUsageReport", func() {
 		})
 	})
 })
+
+func getResponse(filename string) []string {
+	var b []string
+	file, err := os.Open(filename)
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+	defer file.Close()
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		b = append(b, scanner.Text())
+	}
+	return b
+}

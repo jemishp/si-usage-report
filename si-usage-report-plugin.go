@@ -2,7 +2,8 @@ package main
 
 import (
 	"code.cloudfoundry.org/cli/plugin"
-		)
+	"fmt"
+)
 
 type SIUsageReport struct{
 	CliConnection plugin.CliConnection
@@ -12,6 +13,7 @@ func (c *SIUsageReport) Run(cliConnection plugin.CliConnection, args []string) {
 	// Ensure that we called the command si-usage-report
 	switch args[0] {
 	case "si-usage-report":
+		c.CliConnection = cliConnection
 		c.GetSIUsageReport(args)
 	}
 }
@@ -42,7 +44,8 @@ func (c *SIUsageReport) GetMetadata() plugin.PluginMetadata {
 }
 
 func (c *SIUsageReport) GetSIUsageReport(args []string) {
-	c.CliConnection.CliCommand("cf -h")
+	c.CliConnection.GetOrgs()
+	fmt.Println("completed")
 }
 
 func main() {
