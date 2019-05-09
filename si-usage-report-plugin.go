@@ -23,7 +23,7 @@ func (s *SIUsageReport) Run(cliConnection plugin.CliConnection, args []string) {
 
 func (s *SIUsageReport) GetMetadata() plugin.PluginMetadata {
 	return plugin.PluginMetadata{
-		Name: "SIUsageReport",
+		Name: "si-usage-report",
 		Version: plugin.VersionType{
 			Major: 1,
 			Minor: 0,
@@ -47,11 +47,11 @@ func (s *SIUsageReport) GetMetadata() plugin.PluginMetadata {
 }
 
 func (s *SIUsageReport) GetSIUsageReport(args []string) {
-	sis, err := s.APIHelper.GetServiceInstances()
+	sis, err := s.APIHelper.GetServiceInstancesWithDetails()
 	if err != nil {
-		fmt.Errorf("error while getting service instances: ", err)
+		fmt.Errorf("error while getting service instances: %s", err)
 	}
-	fmt.Printf("completed: %s", sis)
+	fmt.Printf("service-instances: %s", sis)
 }
 
 func main() {

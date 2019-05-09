@@ -55,7 +55,7 @@ var _ = Describe("SiUsageReport", func() {
 
 		When("GetMetaData() is called", func() {
 			It("returns the correct name for the plugin", func() {
-				Expect(subject.GetMetadata().Name).To(Equal("SIUsageReport"))
+				Expect(subject.GetMetadata().Name).To(Equal("si-usage-report"))
 			})
 			It("returns the correct version of the plugin", func() {
 				Expect(subject.GetMetadata().Version).To(Equal(expectedPluginVersion))

@@ -5,6 +5,7 @@ import (
 	"github.com/cloudfoundry/cli/plugin/models"
 	"github.com/krujos/cfcurl"
 	"strconv"
+	"time"
 )
 
 type CFAPIHelper interface {
@@ -12,10 +13,18 @@ type CFAPIHelper interface {
 	GetServices() ([]plugin_models.GetServices_Model, error)
 	GetServicePlans() ([]plugin_models.GetService_ServicePlan, error)
 	GetServiceInstances() ([]plugin_models.GetSpace_ServiceInstance, error)
+	GetServiceInstancesWithDetails() ([]ServiceInstance_Details, error)
 }
 
 type APIHelper struct {
 	cliConnection plugin.CliConnection
+}
+
+type ServiceInstance_Details struct {
+	Guid      string
+	Name      string
+	Type      string
+	CreatedAt time.Time
 }
 
 func New(cliConnection plugin.CliConnection) CFAPIHelper {
@@ -128,6 +137,40 @@ func (a *APIHelper) GetServiceInstances() ([]plugin_models.GetSpace_ServiceInsta
 				})
 		}
 
+	}
+	return serviceInstances, nil
+}
+
+func (a *APIHelper) GetServiceInstancesWithDetails() ([]ServiceInstance_Details, error) {
+	serviceInstanceDetailsJSON, err := cfcurl.Curl(a.cliConnection, "/v2/service_instances")
+	if err != nil {
+		return nil, err
+	}
+	pages := int(serviceInstanceDetailsJSON["total_pages"].(float64))
+	layout := "2006-01-02T15:04:05Z"
+	var serviceInstances []ServiceInstance_Details
+	for i := 1; i <= pages; i++ {
+		if i != 1 {
+			serviceInstanceDetailsJSON, err = cfcurl.Curl(a.cliConnection, "/v2/service_instances?page="+strconv.Itoa(i))
+		}
+		for _, o := range serviceInstanceDetailsJSON["resources"].([]interface{}) {
+			theServiceInstance := o.(map[string]interface{})
+			entity := theServiceInstance["entity"].(map[string]interface{})
+			metadata := theServiceInstance["metadata"].(map[string]interface{})
+			dateString := metadata["created_at"].(string)
+			createdTime, err := time.Parse(layout, dateString)
+			if err != nil {
+				return nil, err
+			}
+
+			serviceInstances = append(serviceInstances,
+				ServiceInstance_Details{
+					Guid:      metadata["guid"].(string),
+					Name:      entity["name"].(string),
+					Type:      entity["type"].(string),
+					CreatedAt: createdTime,
+				})
+		}
 	}
 	return serviceInstances, nil
 }

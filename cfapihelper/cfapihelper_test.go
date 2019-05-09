@@ -9,6 +9,7 @@ import (
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"os"
+	"time"
 )
 
 var _ = Describe("SiUsageReport", func() {
@@ -73,6 +74,35 @@ var _ = Describe("SiUsageReport", func() {
 				serviceInstances, err := apiHelper.GetServiceInstances()
 				Expect(err).NotTo(HaveOccurred())
 				Expect(len(serviceInstances)).To(Equal(2))
+			})
+		})
+		When("2 service instances with details exist", func() {
+			var serviceInstancesJSON []string
+			var expectedServiceInstances []cfapihelper.ServiceInstance_Details
+
+			BeforeEach(func() {
+				serviceInstancesJSON = getResponse("test-data/service-instances.json")
+				fakeClientConnection.CliCommandWithoutTerminalOutputReturns(serviceInstancesJSON, nil)
+				expectedServiceInstances = []cfapihelper.ServiceInstance_Details{
+					{
+						Guid:      "31e3efc1-1898-4156-b936-a666131483e1",
+						Name:      "test-si-1",
+						Type:      "managed_service_instance",
+						CreatedAt: time.Date(2019, 05, 06, 21, 18, 47, 0, time.UTC),
+					},
+					{
+						Guid:      "31e3efc1-1898-4156-b936-a666131483e1",
+						Name:      "test-si-2",
+						Type:      "managed_service_instance",
+						CreatedAt: time.Date(2019, 05, 06, 21, 18, 47, 0, time.UTC),
+					},
+				}
+			})
+			It("should return list of service instances with details", func() {
+				serviceInstances, err := apiHelper.GetServiceInstancesWithDetails()
+				Expect(err).NotTo(HaveOccurred())
+				Expect(len(serviceInstances)).To(Equal(2))
+				Expect(serviceInstances).To(Equal(expectedServiceInstances))
 			})
 		})
 	})
