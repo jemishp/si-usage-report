@@ -107,7 +107,7 @@ func (a *APIHelper) GetServicePlans() ([]plugin_models.GetService_ServicePlan, e
 }
 
 func (a *APIHelper) GetServiceInstances() ([]plugin_models.GetSpace_ServiceInstance, error) {
-	serviceInstancesJSON, err := cfcurl.Curl(a.cliConnection, "/v2/services_instances")
+	serviceInstancesJSON, err := cfcurl.Curl(a.cliConnection, "/v2/service_instances")
 	if err != nil {
 		return nil, err
 	}
