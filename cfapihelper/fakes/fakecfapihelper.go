@@ -5,6 +5,7 @@ import (
 	"errors"
 	"github.com/cloudfoundry/cli/plugin/models"
 	"github.com/jpatel-pivotal/si-usage-report/cfapihelper"
+	"time"
 )
 
 type FakeAPIHelper struct {
@@ -19,6 +20,7 @@ type CFAPIHelper interface {
 	GetServiceInstancesWithDetails() ([]cfapihelper.ServiceInstance_Details, error)
 	GetServiceInstancePlanDetails(servicePlanURL string) (string, error)
 	GetServiceInstanceServiceDetails(serviceURL string) (string, error)
+	IsLoggedIn() (bool, error)
 }
 
 var _ cfapihelper.CFAPIHelper = new(FakeAPIHelper)
@@ -40,7 +42,15 @@ func (f *FakeAPIHelper) GetServiceInstances() ([]plugin_models.GetSpace_ServiceI
 }
 
 func (f *FakeAPIHelper) GetServiceInstancesWithDetails() ([]cfapihelper.ServiceInstance_Details, error) {
-	return nil, errors.New("blah")
+	return []cfapihelper.ServiceInstance_Details{
+		{
+			Guid:      "31e3efc1-1898-4156-b936-a666131483e1",
+			Name:      "test-si-1",
+			Plan:      "/v2/service_plans/fd12a21d-6667-4150-8193-884d083b7874",
+			Service:   "/v2/services/5e30ff7e-d857-4aa7-9eda-7db9a0d7b19b",
+			Type:      "managed_service_instance",
+			CreatedAt: time.Date(2019, 05, 06, 21, 18, 47, 0, time.UTC),
+		}}, nil
 }
 
 func (f *FakeAPIHelper) GetServiceInstancePlanDetails(servicePlanURL string) (string, error) {
@@ -49,4 +59,8 @@ func (f *FakeAPIHelper) GetServiceInstancePlanDetails(servicePlanURL string) (st
 
 func (f *FakeAPIHelper) GetServiceInstanceServiceDetails(serviceURL string) (string, error) {
 	return "", errors.New("blah")
+}
+
+func (f *FakeAPIHelper) IsLoggedIn() (bool, error) {
+	return true, nil
 }

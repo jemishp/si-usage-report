@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-var _ = Describe("SiUsageReport", func() {
+var _ = Describe("cfapiHelper", func() {
 	Describe("Happy path", func() {
 		var (
 			apiHelper            cfapihelper.CFAPIHelper
@@ -24,7 +24,7 @@ var _ = Describe("SiUsageReport", func() {
 			apiHelper = cfapihelper.New(fakeClientConnection)
 		})
 
-		When("2 orgs exist", func() {
+		Context("2 orgs exist", func() {
 			var orgsJSON []string
 
 			BeforeEach(func() {
@@ -37,7 +37,7 @@ var _ = Describe("SiUsageReport", func() {
 				Expect(len(orgs)).To(Equal(2))
 			})
 		})
-		When("26 services exist", func() {
+		Context("26 services exist", func() {
 			var servicesJSON []string
 
 			BeforeEach(func() {
@@ -50,7 +50,7 @@ var _ = Describe("SiUsageReport", func() {
 				Expect(len(services)).To(Equal(26))
 			})
 		})
-		When("100 service plans exist", func() {
+		Context("100 service plans exist", func() {
 			var servicePlansJSON []string
 
 			BeforeEach(func() {
@@ -63,7 +63,7 @@ var _ = Describe("SiUsageReport", func() {
 				Expect(len(services)).To(Equal(100))
 			})
 		})
-		When("2 service instances exist", func() {
+		Context("2 service instances exist", func() {
 			var serviceInstancesJSON []string
 
 			BeforeEach(func() {
@@ -76,7 +76,20 @@ var _ = Describe("SiUsageReport", func() {
 				Expect(len(serviceInstances)).To(Equal(2))
 			})
 		})
-		When("2 service instances with details exist", func() {
+		Context("a lot of service instances are returned across multiple pages", func() {
+			var serviceInstancesJSON []string
+
+			BeforeEach(func() {
+				serviceInstancesJSON = getResponse("test-data/many-service-instances.json")
+				fakeClientConnection.CliCommandWithoutTerminalOutputReturns(serviceInstancesJSON, nil)
+			})
+			It("should return list of service instances", func() {
+				serviceInstances, err := apiHelper.GetServiceInstances()
+				Expect(err).NotTo(HaveOccurred())
+				Expect(len(serviceInstances)).To(Equal(41600))
+			})
+		})
+		Context("2 service instances with details exist", func() {
 			var serviceInstancesJSON []string
 			var expectedServiceInstances []cfapihelper.ServiceInstance_Details
 
@@ -109,7 +122,7 @@ var _ = Describe("SiUsageReport", func() {
 				Expect(serviceInstances).To(Equal(expectedServiceInstances))
 			})
 		})
-		When("getting the plan name for a service instance", func() {
+		Context("getting the plan name for a service instance", func() {
 			var serviceInstancePlanDetailsJSON []string
 
 			BeforeEach(func() {
@@ -122,7 +135,7 @@ var _ = Describe("SiUsageReport", func() {
 				Expect(serviceInstancePlanName).To(Equal("spark"))
 			})
 		})
-		When("getting the service name for a service instance", func() {
+		Context("getting the service name for a service instance", func() {
 			var serviceInstanceServiceDetailsJSON []string
 
 			BeforeEach(func() {
@@ -146,7 +159,7 @@ var _ = Describe("SiUsageReport", func() {
 			fakeClientConnection = &pluginfakes.FakeCliConnection{}
 			apiHelper = cfapihelper.New(fakeClientConnection)
 		})
-		When("really bad error occurs", func() {
+		Context("really bad error occurs", func() {
 			BeforeEach(func() {
 				fakeClientConnection.CliCommandWithoutTerminalOutputReturns(nil,
 					errors.New("really bad error"))
@@ -157,7 +170,17 @@ var _ = Describe("SiUsageReport", func() {
 				Expect(len(returned)).To(Equal(0))
 			})
 		})
-		When("no orgs exist", func() {
+		Context("not logged in error occurs", func() {
+			BeforeEach(func() {
+				fakeClientConnection.IsLoggedInReturns(false, errors.New("really bad login error"))
+			})
+			It("should return an error", func() {
+				returned, err := apiHelper.IsLoggedIn()
+				Expect(err).To(MatchError("really bad login error"))
+				Expect(returned).To(Equal(false))
+			})
+		})
+		Context("no orgs exist", func() {
 			var orgsJSON []string
 
 			BeforeEach(func() {
@@ -170,7 +193,7 @@ var _ = Describe("SiUsageReport", func() {
 				Expect(len(orgs)).To(Equal(0))
 			})
 		})
-		When("no services exist", func() {
+		Context("no services exist", func() {
 			var servicesJSON []string
 
 			BeforeEach(func() {
@@ -183,7 +206,7 @@ var _ = Describe("SiUsageReport", func() {
 				Expect(len(services)).To(Equal(0))
 			})
 		})
-		When("no service plans exist", func() {
+		Context("no service plans exist", func() {
 			var servicePlansJSON []string
 
 			BeforeEach(func() {
@@ -196,7 +219,7 @@ var _ = Describe("SiUsageReport", func() {
 				Expect(len(services)).To(Equal(0))
 			})
 		})
-		When("no service instances exist", func() {
+		Context("no service instances exist", func() {
 			var serviceInstancesJSON []string
 
 			BeforeEach(func() {
@@ -209,7 +232,7 @@ var _ = Describe("SiUsageReport", func() {
 				Expect(len(serviceInstances)).To(Equal(0))
 			})
 		})
-		When("no plan name for a service instance exists", func() {
+		Context("no plan name for a service instance exists", func() {
 			var serviceInstancePlanDetailsJSON []string
 
 			BeforeEach(func() {
@@ -222,7 +245,7 @@ var _ = Describe("SiUsageReport", func() {
 				Expect(serviceInstancePlanName).To(Equal(""))
 			})
 		})
-		When("no service name for a service instance exists", func() {
+		Context("no service name for a service instance exists", func() {
 			var serviceInstanceServiceDetailsJSON []string
 
 			BeforeEach(func() {

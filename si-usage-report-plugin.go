@@ -2,13 +2,16 @@ package main
 
 import (
 	"code.cloudfoundry.org/cli/plugin"
+	"encoding/json"
 	"fmt"
 	"github.com/jpatel-pivotal/si-usage-report/cfapihelper"
+	"io"
 )
 
 type SIUsageReport struct {
 	CliConnection plugin.CliConnection
 	APIHelper     cfapihelper.CFAPIHelper
+	OutBuf        io.Writer
 }
 
 func (s *SIUsageReport) Run(cliConnection plugin.CliConnection, args []string) {
@@ -47,11 +50,24 @@ func (s *SIUsageReport) GetMetadata() plugin.PluginMetadata {
 }
 
 func (s *SIUsageReport) GetSIUsageReport(args []string) {
-	sis, err := s.APIHelper.GetServiceInstancesWithDetails()
+	logedIn, err := s.APIHelper.IsLoggedIn()
 	if err != nil {
-		fmt.Errorf("error while getting service instances: %s", err)
+		fmt.Fprintf(s.OutBuf, "error checking login status: %s", err.Error())
 	}
-	fmt.Printf("service-instances: %s", sis)
+	if logedIn {
+		sis, err := s.APIHelper.GetServiceInstancesWithDetails()
+		if err != nil {
+			fmt.Fprintf(s.OutBuf, "error while getting service instances: %s", err.Error())
+		} else {
+			sisJSON, err := json.Marshal(sis)
+			if err != nil {
+				fmt.Fprintf(s.OutBuf, "error converting to json: %s", err.Error())
+			}
+			fmt.Fprintf(s.OutBuf, "service-instances: %s", sisJSON)
+		}
+	} else {
+		fmt.Fprint(s.OutBuf, "need to log in")
+	}
 }
 
 func main() {

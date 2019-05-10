@@ -3,27 +3,32 @@ package main_test
 import (
 	"code.cloudfoundry.org/cli/plugin"
 	"code.cloudfoundry.org/cli/plugin/pluginfakes"
+	"encoding/json"
 	. "github.com/jpatel-pivotal/si-usage-report"
 	"github.com/jpatel-pivotal/si-usage-report/cfapihelper"
+	"github.com/jpatel-pivotal/si-usage-report/cfapihelper/fakes"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gbytes"
 	"github.com/onsi/gomega/gexec"
 	"io"
 	"os/exec"
+	"time"
 )
 
-var _ = Describe("SiUsageReport", func() {
+var _ bool = Describe("SiUsageReport", func() {
 	Describe("happy path", func() {
 		var (
-			subject               *SIUsageReport
-			expectedPluginVersion plugin.VersionType
-			expectedCLIVersion    plugin.VersionType
-			expectedCommand       plugin.Command
-			outBuffer             io.Writer
-			errBuffer             io.Writer
-			fakeCLIConnection     *pluginfakes.FakeCliConnection
-			apiHelper             cfapihelper.CFAPIHelper
+			subject                 *SIUsageReport
+			expectedPluginVersion   plugin.VersionType
+			expectedCLIVersion      plugin.VersionType
+			expectedCommand         plugin.Command
+			outBuffer               io.Writer
+			errBuffer               io.Writer
+			fakeCLIConnection       *pluginfakes.FakeCliConnection
+			apiHelper               cfapihelper.CFAPIHelper
+			fakeapiHelper           fakes.FakeAPIHelper
+			expectedServiceInstance []cfapihelper.ServiceInstance_Details
 		)
 
 		BeforeEach(func() {
@@ -50,10 +55,11 @@ var _ = Describe("SiUsageReport", func() {
 				},
 			}
 			outBuffer = gbytes.NewBuffer()
+			subject.OutBuf = outBuffer
 			errBuffer = gbytes.NewBuffer()
 		})
 
-		When("GetMetaData() is called", func() {
+		Context("GetMetaData() is called", func() {
 			It("returns the correct name for the plugin", func() {
 				Expect(subject.GetMetadata().Name).To(Equal("si-usage-report"))
 			})
@@ -69,15 +75,17 @@ var _ = Describe("SiUsageReport", func() {
 			})
 		})
 		//TODO Move this to integration test
-		When("cf si-usage-report is run without installing the plugin", func() {
+		Context("cf si-usage-report is run without installing the plugin", func() {
 			subject = new(SIUsageReport)
 			fakeCLIConnection = &pluginfakes.FakeCliConnection{}
 			apiHelper = cfapihelper.New(fakeCLIConnection)
 			subject.CliConnection = fakeCLIConnection
 			subject.APIHelper = apiHelper
+			outBuffer = gbytes.NewBuffer()
+			subject.OutBuf = outBuffer
 			subject.Run(fakeCLIConnection, []string{"si-usage-report"})
 			//subject.GetSIUsageReport([]string{"test"})
-			It("prints the usage message", func() {
+			It("prints generic CF CLI message", func() {
 				args := []string{"si-usage-report"}
 				session, err := gexec.Start(exec.Command("cf", args...), outBuffer, errBuffer)
 				session.Wait()
@@ -86,28 +94,60 @@ var _ = Describe("SiUsageReport", func() {
 				Expect(errBuffer).To(gbytes.Say(""))
 			})
 		})
-		When("GetSIUsageReport is called", func() {
-			It("prints completed", func() {
+		Context("GetSIUsageReport is called", func() {
+			When("user is not logged in", func() {
+				BeforeEach(func() {
+					fakeCLIConnection.IsLoggedInReturns(false, nil)
+					subject.CliConnection = fakeCLIConnection
 
+				})
+				It("asks user to log in", func() {
+					subject.Run(fakeCLIConnection, []string{"si-usage-report"})
+					Expect(outBuffer).To(gbytes.Say("need to log in"))
+				})
+			})
+			When("user is logged in", func() {
+				When("service instances are not returned", func() {
+					BeforeEach(func() {
+						fakeCLIConnection.IsLoggedInReturns(true, nil)
+						subject.CliConnection = fakeCLIConnection
+
+					})
+					It("prints an error message", func() {
+						subject.Run(fakeCLIConnection, []string{"si-usage-report"})
+						Expect(outBuffer).To(gbytes.Say("error while getting service instances: CF API returned no output"))
+					})
+				})
+				When("service instances are returned", func() {
+					var expectedSIJSON []byte
+					BeforeEach(func() {
+						fakeCLIConnection.IsLoggedInReturns(true, nil)
+						fakeapiHelper = fakes.FakeAPIHelper{
+							CliConnection: fakeCLIConnection,
+						}
+						subject.APIHelper = &fakeapiHelper
+						subject.CliConnection = fakeCLIConnection
+						expectedServiceInstance = []cfapihelper.ServiceInstance_Details{
+							{
+								Guid:      "31e3efc1-1898-4156-b936-a666131483e1",
+								Name:      "test-si-1",
+								Plan:      "/v2/service_plans/fd12a21d-6667-4150-8193-884d083b7874",
+								Service:   "/v2/services/5e30ff7e-d857-4aa7-9eda-7db9a0d7b19b",
+								Type:      "managed_service_instance",
+								CreatedAt: time.Date(2019, 05, 06, 21, 18, 47, 0, time.UTC),
+							}}
+						expectedSIJSON, err := json.Marshal(expectedServiceInstance)
+						Expect(err).NotTo(HaveOccurred())
+						Expect(expectedSIJSON).ToNot(BeNil())
+					})
+					It("retrieves service instance details ", func() {
+						subject.GetSIUsageReport([]string{"test"})
+						Expect(outBuffer).To(gbytes.Say(string(expectedSIJSON)))
+					})
+
+				})
 			})
 		})
-
-		//When("GetSIUsageReport is called", func() {
-		//	var out []string
-		//	out, err = subject.ApiHelper.CliCommand("")
-		//	It("prints a message", func() {
-		//		Expect(err).To(BeNil())
-		//		Expect(out).To(Equal("Running the si-usage-report with args:"))
-		//	})
-		//})
-		//When("GetSIUsageReport is called", func() {
-		//	var out []string
-		//	out, err = subject.ApiHelper.CliCommand("")
-		//	It("prints a message", func() {
-		//		Expect(err).To(BeNil())
-		//		Expect(out).To(Equal("Running the si-usage-report with args:"))
-		//	})
-		//})
 	})
 
 })

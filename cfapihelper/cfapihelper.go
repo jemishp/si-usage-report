@@ -16,6 +16,7 @@ type CFAPIHelper interface {
 	GetServiceInstancesWithDetails() ([]ServiceInstance_Details, error)
 	GetServiceInstancePlanDetails(servicePlanURL string) (string, error)
 	GetServiceInstanceServiceDetails(serviceURL string) (string, error)
+	IsLoggedIn() (bool, error)
 }
 
 type APIHelper struct {
@@ -213,4 +214,15 @@ func (a *APIHelper) GetServiceInstanceServiceDetails(serviceURL string) (string,
 	}
 
 	return service.Name, nil
+}
+
+func (a *APIHelper) IsLoggedIn() (bool, error) {
+	return a.cliConnection.IsLoggedIn()
+}
+
+func fillinPlanServiceDetails(serviceInstances []ServiceInstance_Details) ([]ServiceInstance_Details, error) {
+	//for i, si := range serviceInstances.([]ServiceInstance_Details) {
+	//
+	//}
+	return nil, nil
 }
