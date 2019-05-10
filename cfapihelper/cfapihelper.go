@@ -15,6 +15,7 @@ type CFAPIHelper interface {
 	GetServiceInstances() ([]plugin_models.GetSpace_ServiceInstance, error)
 	GetServiceInstancesWithDetails() ([]ServiceInstance_Details, error)
 	GetServiceInstancePlanDetails(servicePlanURL string) (string, error)
+	GetServiceInstanceServiceDetails(serviceURL string) (string, error)
 }
 
 type APIHelper struct {
@@ -162,10 +163,7 @@ func (a *APIHelper) GetServiceInstancesWithDetails() ([]ServiceInstance_Details,
 			metadata := theServiceInstance["metadata"].(map[string]interface{})
 			dateString := metadata["created_at"].(string)
 			planURL := entity["service_plan_url"].(string)
-			planName, err := a.GetServiceInstancePlanDetails(planURL)
-			if err != nil {
-				return nil, err
-			}
+			serviceURL := entity["service_url"].(string)
 			createdTime, err := time.Parse(layout, dateString)
 			if err != nil {
 				return nil, err
@@ -175,8 +173,8 @@ func (a *APIHelper) GetServiceInstancesWithDetails() ([]ServiceInstance_Details,
 				ServiceInstance_Details{
 					Guid:      metadata["guid"].(string),
 					Name:      entity["name"].(string),
-					Plan:      planName,
-					Service:   "",
+					Plan:      planURL,
+					Service:   serviceURL,
 					Type:      entity["type"].(string),
 					CreatedAt: createdTime,
 				})
@@ -199,4 +197,20 @@ func (a *APIHelper) GetServiceInstancePlanDetails(servicePlanURL string) (string
 	}
 
 	return servicePlans.Name, nil
+}
+
+func (a *APIHelper) GetServiceInstanceServiceDetails(serviceURL string) (string, error) {
+	serviceInstanceServiceDetailsJSON, err := cfcurl.Curl(a.cliConnection, serviceURL)
+	if err != nil {
+		return "", err
+	}
+	var service plugin_models.GetService_Model
+	entity := serviceInstanceServiceDetailsJSON["entity"].(map[string]interface{})
+	metadata := serviceInstanceServiceDetailsJSON["metadata"].(map[string]interface{})
+	service = plugin_models.GetService_Model{
+		Name: entity["label"].(string),
+		Guid: metadata["guid"].(string),
+	}
+
+	return service.Name, nil
 }
