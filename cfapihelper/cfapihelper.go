@@ -14,6 +14,7 @@ type CFAPIHelper interface {
 	GetServicePlans() ([]plugin_models.GetService_ServicePlan, error)
 	GetServiceInstances() ([]plugin_models.GetSpace_ServiceInstance, error)
 	GetServiceInstancesWithDetails() ([]ServiceInstance_Details, error)
+	GetServiceInstancePlanDetails(servicePlanURL string) (string, error)
 }
 
 type APIHelper struct {
@@ -23,6 +24,8 @@ type APIHelper struct {
 type ServiceInstance_Details struct {
 	Guid      string
 	Name      string
+	Plan      string
+	Service   string
 	Type      string
 	CreatedAt time.Time
 }
@@ -158,6 +161,11 @@ func (a *APIHelper) GetServiceInstancesWithDetails() ([]ServiceInstance_Details,
 			entity := theServiceInstance["entity"].(map[string]interface{})
 			metadata := theServiceInstance["metadata"].(map[string]interface{})
 			dateString := metadata["created_at"].(string)
+			planURL := entity["service_plan_url"].(string)
+			planName, err := a.GetServiceInstancePlanDetails(planURL)
+			if err != nil {
+				return nil, err
+			}
 			createdTime, err := time.Parse(layout, dateString)
 			if err != nil {
 				return nil, err
@@ -167,10 +175,28 @@ func (a *APIHelper) GetServiceInstancesWithDetails() ([]ServiceInstance_Details,
 				ServiceInstance_Details{
 					Guid:      metadata["guid"].(string),
 					Name:      entity["name"].(string),
+					Plan:      planName,
+					Service:   "",
 					Type:      entity["type"].(string),
 					CreatedAt: createdTime,
 				})
 		}
 	}
 	return serviceInstances, nil
+}
+
+func (a *APIHelper) GetServiceInstancePlanDetails(servicePlanURL string) (string, error) {
+	serviceInstancePlanDetailsJSON, err := cfcurl.Curl(a.cliConnection, servicePlanURL)
+	if err != nil {
+		return "", err
+	}
+	var servicePlans plugin_models.GetService_ServicePlan
+	entity := serviceInstancePlanDetailsJSON["entity"].(map[string]interface{})
+	metadata := serviceInstancePlanDetailsJSON["metadata"].(map[string]interface{})
+	servicePlans = plugin_models.GetService_ServicePlan{
+		Name: entity["name"].(string),
+		Guid: metadata["guid"].(string),
+	}
+
+	return servicePlans.Name, nil
 }

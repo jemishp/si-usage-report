@@ -16,6 +16,8 @@ type CFAPIHelper interface {
 	GetServices() ([]plugin_models.GetServices_Model, error)
 	GetServicePlans() ([]plugin_models.GetService_ServicePlan, error)
 	GetServiceInstances() ([]plugin_models.GetSpace_ServiceInstance, error)
+	GetServiceInstancesWithDetails() ([]cfapihelper.ServiceInstance_Details, error)
+	GetServiceInstancePlanDetails(servicePlanURL string) (string, error)
 }
 
 var _ cfapihelper.CFAPIHelper = new(FakeAPIHelper)
@@ -34,4 +36,12 @@ func (f *FakeAPIHelper) GetServicePlans() ([]plugin_models.GetService_ServicePla
 
 func (f *FakeAPIHelper) GetServiceInstances() ([]plugin_models.GetSpace_ServiceInstance, error) {
 	return nil, errors.New("blah")
+}
+
+func (f *FakeAPIHelper) GetServiceInstancesWithDetails() ([]cfapihelper.ServiceInstance_Details, error) {
+	return nil, errors.New("blah")
+}
+
+func (f *FakeAPIHelper) GetServiceInstancePlanDetails(servicePlanURL string) (string, error) {
+	return "", errors.New("blah")
 }

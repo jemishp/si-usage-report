@@ -87,12 +87,16 @@ var _ = Describe("SiUsageReport", func() {
 					{
 						Guid:      "31e3efc1-1898-4156-b936-a666131483e1",
 						Name:      "test-si-1",
+						Plan:      "spark",
+						Service:   "cleardb",
 						Type:      "managed_service_instance",
 						CreatedAt: time.Date(2019, 05, 06, 21, 18, 47, 0, time.UTC),
 					},
 					{
 						Guid:      "31e3efc1-1898-4156-b936-a666131483e1",
 						Name:      "test-si-2",
+						Plan:      "spark",
+						Service:   "cleardb",
 						Type:      "managed_service_instance",
 						CreatedAt: time.Date(2019, 05, 06, 21, 18, 47, 0, time.UTC),
 					},
@@ -103,6 +107,19 @@ var _ = Describe("SiUsageReport", func() {
 				Expect(err).NotTo(HaveOccurred())
 				Expect(len(serviceInstances)).To(Equal(2))
 				Expect(serviceInstances).To(Equal(expectedServiceInstances))
+			})
+		})
+		When("getting the plan name for a service instance", func() {
+			var serviceInstancePlanDetailsJSON []string
+
+			BeforeEach(func() {
+				serviceInstancePlanDetailsJSON = getResponse("test-data/si-plan-details.json")
+				fakeClientConnection.CliCommandWithoutTerminalOutputReturns(serviceInstancePlanDetailsJSON, nil)
+			})
+			It("returns service plan name of the service instance", func() {
+				serviceInstancePlanName, err := apiHelper.GetServiceInstancePlanDetails("test")
+				Expect(err).NotTo(HaveOccurred())
+				Expect(serviceInstancePlanName).To(Equal("spark"))
 			})
 		})
 	})
@@ -177,6 +194,19 @@ var _ = Describe("SiUsageReport", func() {
 				serviceInstances, err := apiHelper.GetServiceInstances()
 				Expect(err).To(MatchError("CF API returned no output"))
 				Expect(len(serviceInstances)).To(Equal(0))
+			})
+		})
+		When("no plan name for a service instance exists", func() {
+			var serviceInstancePlanDetailsJSON []string
+
+			BeforeEach(func() {
+				serviceInstancePlanDetailsJSON = getResponse("test-data/no-si-plan-details.json")
+				fakeClientConnection.CliCommandWithoutTerminalOutputReturns(serviceInstancePlanDetailsJSON, nil)
+			})
+			It("should return list of service instances", func() {
+				serviceInstancePlanName, err := apiHelper.GetServiceInstancePlanDetails("test")
+				Expect(err).To(MatchError("CF API returned no output"))
+				Expect(serviceInstancePlanName).To(Equal(""))
 			})
 		})
 	})
