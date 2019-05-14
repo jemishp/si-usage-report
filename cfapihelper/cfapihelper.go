@@ -26,6 +26,8 @@ type APIHelper struct {
 type ServiceInstance_Details struct {
 	Guid      string
 	Name      string
+	Org       string
+	Space     string
 	Plan      string
 	Service   string
 	Type      string
@@ -147,7 +149,8 @@ func (a *APIHelper) GetServiceInstances() ([]plugin_models.GetSpace_ServiceInsta
 }
 
 func (a *APIHelper) GetServiceInstancesWithDetails() ([]ServiceInstance_Details, error) {
-	serviceInstanceDetailsJSON, err := cfcurl.Curl(a.cliConnection, "/v2/service_instances")
+	queryPath := "/v2/service_instances?q=&inline-relations-depth=2"
+	serviceInstanceDetailsJSON, err := cfcurl.Curl(a.cliConnection, queryPath)
 	if err != nil {
 		return nil, err
 	}
@@ -156,26 +159,44 @@ func (a *APIHelper) GetServiceInstancesWithDetails() ([]ServiceInstance_Details,
 	var serviceInstances []ServiceInstance_Details
 	for i := 1; i <= pages; i++ {
 		if i != 1 {
-			serviceInstanceDetailsJSON, err = cfcurl.Curl(a.cliConnection, "/v2/service_instances?page="+strconv.Itoa(i))
+			serviceInstanceDetailsJSON, err = cfcurl.Curl(a.cliConnection, queryPath+"&page="+strconv.Itoa(i))
 		}
 		for _, o := range serviceInstanceDetailsJSON["resources"].([]interface{}) {
 			theServiceInstance := o.(map[string]interface{})
 			entity := theServiceInstance["entity"].(map[string]interface{})
 			metadata := theServiceInstance["metadata"].(map[string]interface{})
 			dateString := metadata["created_at"].(string)
-			planURL := entity["service_plan_url"].(string)
-			serviceURL := entity["service_url"].(string)
 			createdTime, err := time.Parse(layout, dateString)
 			if err != nil {
 				return nil, err
 			}
 
+			//getting associated space & org name
+			theSpace := entity["space"].(map[string]interface{})
+			spaceEntity := theSpace["entity"].(map[string]interface{})
+			spaceName := spaceEntity["name"].(string)
+			theOrg := spaceEntity["organization"].(map[string]interface{})
+			orgEntity := theOrg["entity"].(map[string]interface{})
+			orgName := orgEntity["name"].(string)
+
+			//getting associated plan name
+			theServicePlan := entity["service_plan"].(map[string]interface{})
+			servicePlanEntity := theServicePlan["entity"].(map[string]interface{})
+			servicePlanName := servicePlanEntity["name"].(string)
+
+			//getting associated service name
+			theService := servicePlanEntity["service"].(map[string]interface{})
+			serviceEntity := theService["entity"].(map[string]interface{})
+			serviceName := serviceEntity["label"].(string)
+
 			serviceInstances = append(serviceInstances,
 				ServiceInstance_Details{
 					Guid:      metadata["guid"].(string),
 					Name:      entity["name"].(string),
-					Plan:      planURL,
-					Service:   serviceURL,
+					Org:       orgName,
+					Space:     spaceName,
+					Plan:      servicePlanName,
+					Service:   serviceName,
 					Type:      entity["type"].(string),
 					CreatedAt: createdTime,
 				})

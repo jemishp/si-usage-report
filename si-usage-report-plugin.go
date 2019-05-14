@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/jpatel-pivotal/si-usage-report/cfapihelper"
 	"io"
+	"os"
 )
 
 type SIUsageReport struct {
@@ -20,6 +21,7 @@ func (s *SIUsageReport) Run(cliConnection plugin.CliConnection, args []string) {
 	case "si-usage-report":
 		s.CliConnection = cliConnection
 		s.APIHelper = cfapihelper.New(s.CliConnection)
+		s.OutBuf = os.Stdout
 		s.GetSIUsageReport(args)
 	}
 }

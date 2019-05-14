@@ -102,7 +102,7 @@ var _ bool = Describe("SiUsageReport", func() {
 
 				})
 				It("asks user to log in", func() {
-					subject.Run(fakeCLIConnection, []string{"si-usage-report"})
+					subject.GetSIUsageReport([]string{"test"})
 					Expect(outBuffer).To(gbytes.Say("need to log in"))
 				})
 			})
@@ -114,7 +114,7 @@ var _ bool = Describe("SiUsageReport", func() {
 
 					})
 					It("prints an error message", func() {
-						subject.Run(fakeCLIConnection, []string{"si-usage-report"})
+						subject.GetSIUsageReport([]string{"test"})
 						Expect(outBuffer).To(gbytes.Say("error while getting service instances: CF API returned no output"))
 					})
 				})

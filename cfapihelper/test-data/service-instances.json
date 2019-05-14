@@ -29,10 +29,1005 @@
             "tags": [],
             "service_guid": "5e30ff7e-d857-4aa7-9eda-7db9a0d7b19b",
             "space_url": "/v2/spaces/d2a0e8f9-11a1-4f98-9a78-e6b9fea93fa1",
+            "space": {
+               "metadata": {
+                  "guid": "d2a0e8f9-11a1-4f98-9a78-e6b9fea93fa1",
+                  "url": "/v2/spaces/d2a0e8f9-11a1-4f98-9a78-e6b9fea93fa1",
+                  "created_at": "2019-05-06T21:10:50Z",
+                  "updated_at": "2019-05-06T21:10:50Z"
+               },
+               "entity": {
+                  "name": "test-space",
+                  "organization_guid": "a8cdec69-4f9e-481b-ae24-f1ebad143d96",
+                  "space_quota_definition_guid": null,
+                  "isolation_segment_guid": null,
+                  "allow_ssh": true,
+                  "organization_url": "/v2/organizations/a8cdec69-4f9e-481b-ae24-f1ebad143d96",
+                  "organization": {
+                     "metadata": {
+                        "guid": "a8cdec69-4f9e-481b-ae24-f1ebad143d96",
+                        "url": "/v2/organizations/a8cdec69-4f9e-481b-ae24-f1ebad143d96",
+                        "created_at": "2019-05-06T21:10:50Z",
+                        "updated_at": "2019-05-06T21:10:50Z"
+                     },
+                     "entity": {
+                        "name": "test-org",
+                        "billing_enabled": false,
+                        "quota_definition_guid": "b72b1acb-ff4f-468d-99c0-05cd91012b62",
+                        "status": "active",
+                        "default_isolation_segment_guid": null,
+                        "quota_definition_url": "/v2/quota_definitions/b72b1acb-ff4f-468d-99c0-05cd91012b62",
+                        "spaces_url": "/v2/organizations/a8cdec69-4f9e-481b-ae24-f1ebad143d96/spaces",
+                        "domains_url": "/v2/organizations/a8cdec69-4f9e-481b-ae24-f1ebad143d96/domains",
+                        "private_domains_url": "/v2/organizations/a8cdec69-4f9e-481b-ae24-f1ebad143d96/private_domains",
+                        "users_url": "/v2/organizations/a8cdec69-4f9e-481b-ae24-f1ebad143d96/users",
+                        "managers_url": "/v2/organizations/a8cdec69-4f9e-481b-ae24-f1ebad143d96/managers",
+                        "billing_managers_url": "/v2/organizations/a8cdec69-4f9e-481b-ae24-f1ebad143d96/billing_managers",
+                        "auditors_url": "/v2/organizations/a8cdec69-4f9e-481b-ae24-f1ebad143d96/auditors",
+                        "app_events_url": "/v2/organizations/a8cdec69-4f9e-481b-ae24-f1ebad143d96/app_events",
+                        "space_quota_definitions_url": "/v2/organizations/a8cdec69-4f9e-481b-ae24-f1ebad143d96/space_quota_definitions"
+                     }
+                  },
+                  "developers_url": "/v2/spaces/d2a0e8f9-11a1-4f98-9a78-e6b9fea93fa1/developers",
+                  "developers": [
+                     {
+                        "metadata": {
+                           "guid": "c27397e6-4476-48b3-b452-1350a71b76df",
+                           "url": "/v2/users/c27397e6-4476-48b3-b452-1350a71b76df",
+                           "created_at": "2014-10-06T22:27:43Z",
+                           "updated_at": "2014-11-26T23:05:23Z"
+                        },
+                        "entity": {
+                           "admin": false,
+                           "active": false,
+                           "default_space_guid": null,
+                           "spaces_url": "/v2/users/c27397e6-4476-48b3-b452-1350a71b76df/spaces",
+                           "organizations_url": "/v2/users/c27397e6-4476-48b3-b452-1350a71b76df/organizations",
+                           "managed_organizations_url": "/v2/users/c27397e6-4476-48b3-b452-1350a71b76df/managed_organizations",
+                           "billing_managed_organizations_url": "/v2/users/c27397e6-4476-48b3-b452-1350a71b76df/billing_managed_organizations",
+                           "audited_organizations_url": "/v2/users/c27397e6-4476-48b3-b452-1350a71b76df/audited_organizations",
+                           "managed_spaces_url": "/v2/users/c27397e6-4476-48b3-b452-1350a71b76df/managed_spaces",
+                           "audited_spaces_url": "/v2/users/c27397e6-4476-48b3-b452-1350a71b76df/audited_spaces"
+                        }
+                     }
+                  ],
+                  "managers_url": "/v2/spaces/d2a0e8f9-11a1-4f98-9a78-e6b9fea93fa1/managers",
+                  "managers": [
+                     {
+                        "metadata": {
+                           "guid": "c27397e6-4476-48b3-b452-1350a71b76df",
+                           "url": "/v2/users/c27397e6-4476-48b3-b452-1350a71b76df",
+                           "created_at": "2014-10-06T22:27:43Z",
+                           "updated_at": "2014-11-26T23:05:23Z"
+                        },
+                        "entity": {
+                           "admin": false,
+                           "active": false,
+                           "default_space_guid": null,
+                           "spaces_url": "/v2/users/c27397e6-4476-48b3-b452-1350a71b76df/spaces",
+                           "organizations_url": "/v2/users/c27397e6-4476-48b3-b452-1350a71b76df/organizations",
+                           "managed_organizations_url": "/v2/users/c27397e6-4476-48b3-b452-1350a71b76df/managed_organizations",
+                           "billing_managed_organizations_url": "/v2/users/c27397e6-4476-48b3-b452-1350a71b76df/billing_managed_organizations",
+                           "audited_organizations_url": "/v2/users/c27397e6-4476-48b3-b452-1350a71b76df/audited_organizations",
+                           "managed_spaces_url": "/v2/users/c27397e6-4476-48b3-b452-1350a71b76df/managed_spaces",
+                           "audited_spaces_url": "/v2/users/c27397e6-4476-48b3-b452-1350a71b76df/audited_spaces"
+                        }
+                     }
+                  ],
+                  "auditors_url": "/v2/spaces/d2a0e8f9-11a1-4f98-9a78-e6b9fea93fa1/auditors",
+                  "auditors": [
+                     {
+                        "metadata": {
+                           "guid": "c27397e6-4476-48b3-b452-1350a71b76df",
+                           "url": "/v2/users/c27397e6-4476-48b3-b452-1350a71b76df",
+                           "created_at": "2014-10-06T22:27:43Z",
+                           "updated_at": "2014-11-26T23:05:23Z"
+                        },
+                        "entity": {
+                           "admin": false,
+                           "active": false,
+                           "default_space_guid": null,
+                           "spaces_url": "/v2/users/c27397e6-4476-48b3-b452-1350a71b76df/spaces",
+                           "organizations_url": "/v2/users/c27397e6-4476-48b3-b452-1350a71b76df/organizations",
+                           "managed_organizations_url": "/v2/users/c27397e6-4476-48b3-b452-1350a71b76df/managed_organizations",
+                           "billing_managed_organizations_url": "/v2/users/c27397e6-4476-48b3-b452-1350a71b76df/billing_managed_organizations",
+                           "audited_organizations_url": "/v2/users/c27397e6-4476-48b3-b452-1350a71b76df/audited_organizations",
+                           "managed_spaces_url": "/v2/users/c27397e6-4476-48b3-b452-1350a71b76df/managed_spaces",
+                           "audited_spaces_url": "/v2/users/c27397e6-4476-48b3-b452-1350a71b76df/audited_spaces"
+                        }
+                     }
+                  ],
+                  "apps_url": "/v2/spaces/d2a0e8f9-11a1-4f98-9a78-e6b9fea93fa1/apps",
+                  "apps": [],
+                  "routes_url": "/v2/spaces/d2a0e8f9-11a1-4f98-9a78-e6b9fea93fa1/routes",
+                  "routes": [],
+                  "domains_url": "/v2/spaces/d2a0e8f9-11a1-4f98-9a78-e6b9fea93fa1/domains",
+                  "domains": [
+                     {
+                        "metadata": {
+                           "guid": "fb6bd89f-2ed9-49d4-9ad1-97951a573135",
+                           "url": "/v2/shared_domains/fb6bd89f-2ed9-49d4-9ad1-97951a573135",
+                           "created_at": "2013-05-04T00:29:46Z",
+                           "updated_at": "2019-02-08T20:18:20Z"
+                        },
+                        "entity": {
+                           "name": "cfapps.io",
+                           "internal": false,
+                           "router_group_guid": null,
+                           "router_group_type": null
+                        }
+                     },
+                     {
+                        "metadata": {
+                           "guid": "d42961c0-8361-4d60-bf58-9a3c1f09600a",
+                           "url": "/v2/shared_domains/d42961c0-8361-4d60-bf58-9a3c1f09600a",
+                           "created_at": "2016-09-08T21:22:28Z",
+                           "updated_at": null
+                        },
+                        "entity": {
+                           "name": "cf-tcpapps.io",
+                           "internal": false,
+                           "router_group_guid": "ac86636b-fc8b-46d7-49c4-edce5118daf2",
+                           "router_group_type": null
+                        }
+                     },
+                     {
+                        "metadata": {
+                           "guid": "f6ed3f6b-f051-4f09-8d88-f95c09e7cf0f",
+                           "url": "/v2/shared_domains/f6ed3f6b-f051-4f09-8d88-f95c09e7cf0f",
+                           "created_at": "2018-02-15T01:15:55Z",
+                           "updated_at": "2018-02-15T01:15:55Z"
+                        },
+                        "entity": {
+                           "name": "apps.internal",
+                           "internal": true,
+                           "router_group_guid": null,
+                           "router_group_type": null
+                        }
+                     }
+                  ],
+                  "service_instances_url": "/v2/spaces/d2a0e8f9-11a1-4f98-9a78-e6b9fea93fa1/service_instances",
+                  "app_events_url": "/v2/spaces/d2a0e8f9-11a1-4f98-9a78-e6b9fea93fa1/app_events",
+                  "events_url": "/v2/spaces/d2a0e8f9-11a1-4f98-9a78-e6b9fea93fa1/events",
+                  "security_groups_url": "/v2/spaces/d2a0e8f9-11a1-4f98-9a78-e6b9fea93fa1/security_groups",
+                  "security_groups": [
+                     {
+                        "metadata": {
+                           "guid": "601d30e6-f16f-4c3d-88ab-723f7c51184a",
+                           "url": "/v2/security_groups/601d30e6-f16f-4c3d-88ab-723f7c51184a",
+                           "created_at": "2014-07-15T18:48:46Z",
+                           "updated_at": null
+                        },
+                        "entity": {
+                           "name": "public_networks",
+                           "rules": [
+                              {
+                                 "destination": "0.0.0.0-9.255.255.255",
+                                 "protocol": "all"
+                              },
+                              {
+                                 "destination": "11.0.0.0-169.253.255.255",
+                                 "protocol": "all"
+                              },
+                              {
+                                 "destination": "169.255.0.0-172.15.255.255",
+                                 "protocol": "all"
+                              },
+                              {
+                                 "destination": "172.32.0.0-192.167.255.255",
+                                 "protocol": "all"
+                              },
+                              {
+                                 "destination": "192.169.0.0-255.255.255.255",
+                                 "protocol": "all"
+                              }
+                           ],
+                           "running_default": true,
+                           "staging_default": true,
+                           "spaces_url": "/v2/security_groups/601d30e6-f16f-4c3d-88ab-723f7c51184a/spaces",
+                           "staging_spaces_url": "/v2/security_groups/601d30e6-f16f-4c3d-88ab-723f7c51184a/staging_spaces"
+                        }
+                     },
+                     {
+                        "metadata": {
+                           "guid": "91b2f6e6-8d38-4c83-88cb-d44e6581d92b",
+                           "url": "/v2/security_groups/91b2f6e6-8d38-4c83-88cb-d44e6581d92b",
+                           "created_at": "2014-07-15T18:48:46Z",
+                           "updated_at": null
+                        },
+                        "entity": {
+                           "name": "dns",
+                           "rules": [
+                              {
+                                 "destination": "0.0.0.0/0",
+                                 "ports": "53",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "0.0.0.0/0",
+                                 "ports": "53",
+                                 "protocol": "udp"
+                              }
+                           ],
+                           "running_default": true,
+                           "staging_default": true,
+                           "spaces_url": "/v2/security_groups/91b2f6e6-8d38-4c83-88cb-d44e6581d92b/spaces",
+                           "staging_spaces_url": "/v2/security_groups/91b2f6e6-8d38-4c83-88cb-d44e6581d92b/staging_spaces"
+                        }
+                     },
+                     {
+                        "metadata": {
+                           "guid": "cf0bc380-857d-40cf-a20a-f6c1f0228b45",
+                           "url": "/v2/security_groups/cf0bc380-857d-40cf-a20a-f6c1f0228b45",
+                           "created_at": "2015-03-10T18:00:45Z",
+                           "updated_at": "2015-03-10T18:01:14Z"
+                        },
+                        "entity": {
+                           "name": "ssh-logging",
+                           "rules": [
+                              {
+                                 "destination": "0.0.0.0/0",
+                                 "log": true,
+                                 "ports": "22",
+                                 "protocol": "tcp"
+                              }
+                           ],
+                           "running_default": true,
+                           "staging_default": false,
+                           "spaces_url": "/v2/security_groups/cf0bc380-857d-40cf-a20a-f6c1f0228b45/spaces",
+                           "staging_spaces_url": "/v2/security_groups/cf0bc380-857d-40cf-a20a-f6c1f0228b45/staging_spaces"
+                        }
+                     },
+                     {
+                        "metadata": {
+                           "guid": "27e106c0-cc2d-4c0a-b293-b51c1cc4c515",
+                           "url": "/v2/security_groups/27e106c0-cc2d-4c0a-b293-b51c1cc4c515",
+                           "created_at": "2015-03-10T18:00:53Z",
+                           "updated_at": "2015-07-28T00:45:49Z"
+                        },
+                        "entity": {
+                           "name": "p-mysql",
+                           "rules": [
+                              {
+                                 "destination": "10.10.2.0/24",
+                                 "ports": "3306",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.66.0/24",
+                                 "ports": "3306",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.130.0/24",
+                                 "ports": "3306",
+                                 "protocol": "tcp"
+                              }
+                           ],
+                           "running_default": true,
+                           "staging_default": false,
+                           "spaces_url": "/v2/security_groups/27e106c0-cc2d-4c0a-b293-b51c1cc4c515/spaces",
+                           "staging_spaces_url": "/v2/security_groups/27e106c0-cc2d-4c0a-b293-b51c1cc4c515/staging_spaces"
+                        }
+                     },
+                     {
+                        "metadata": {
+                           "guid": "bff21eb5-afb9-4826-bc80-0c8d46d6d035",
+                           "url": "/v2/security_groups/bff21eb5-afb9-4826-bc80-0c8d46d6d035",
+                           "created_at": "2015-08-07T17:22:21Z",
+                           "updated_at": "2018-03-29T13:55:48Z"
+                        },
+                        "entity": {
+                           "name": "pcf-redis",
+                           "rules": [
+                              {
+                                 "destination": "10.10.7.0/24",
+                                 "ports": "6379",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.7.13/32",
+                                 "ports": "32768-61000",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.168.0/22",
+                                 "ports": "6379",
+                                 "protocol": "tcp"
+                              }
+                           ],
+                           "running_default": true,
+                           "staging_default": false,
+                           "spaces_url": "/v2/security_groups/bff21eb5-afb9-4826-bc80-0c8d46d6d035/spaces",
+                           "staging_spaces_url": "/v2/security_groups/bff21eb5-afb9-4826-bc80-0c8d46d6d035/staging_spaces"
+                        }
+                     },
+                     {
+                        "metadata": {
+                           "guid": "a5eafd3f-414c-4a21-a951-4693de3051ae",
+                           "url": "/v2/security_groups/a5eafd3f-414c-4a21-a951-4693de3051ae",
+                           "created_at": "2015-11-21T01:16:35Z",
+                           "updated_at": "2016-04-12T21:07:30Z"
+                        },
+                        "entity": {
+                           "name": "rabbitmq",
+                           "rules": [
+                              {
+                                 "destination": "10.10.38.8/32",
+                                 "ports": "5672",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.38.8/32",
+                                 "ports": "5671",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.38.8/32",
+                                 "ports": "1883",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.38.8/32",
+                                 "ports": "8883",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.38.8/32",
+                                 "ports": "61613",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.38.8/32",
+                                 "ports": "61614",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.38.8/32",
+                                 "ports": "15672",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.38.8/32",
+                                 "ports": "15674",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.102.8/32",
+                                 "ports": "5672",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.102.8/32",
+                                 "ports": "5671",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.102.8/32",
+                                 "ports": "1883",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.102.8/32",
+                                 "ports": "8883",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.102.8/32",
+                                 "ports": "61613",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.102.8/32",
+                                 "ports": "61614",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.102.8/32",
+                                 "ports": "15672",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.102.8/32",
+                                 "ports": "15674",
+                                 "protocol": "tcp"
+                              }
+                           ],
+                           "running_default": true,
+                           "staging_default": false,
+                           "spaces_url": "/v2/security_groups/a5eafd3f-414c-4a21-a951-4693de3051ae/spaces",
+                           "staging_spaces_url": "/v2/security_groups/a5eafd3f-414c-4a21-a951-4693de3051ae/staging_spaces"
+                        }
+                     },
+                     {
+                        "metadata": {
+                           "guid": "a42bba51-c8f6-4be9-a401-cb9e4eab834a",
+                           "url": "/v2/security_groups/a42bba51-c8f6-4be9-a401-cb9e4eab834a",
+                           "created_at": "2016-05-27T17:14:23Z",
+                           "updated_at": "2018-09-13T21:01:36Z"
+                        },
+                        "entity": {
+                           "name": "pcf-metrics",
+                           "rules": [
+                              {
+                                 "destination": "10.10.62.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.62.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "udp"
+                              },
+                              {
+                                 "destination": "10.10.9.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.9.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "udp"
+                              },
+                              {
+                                 "destination": "10.10.133.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.133.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "udp"
+                              },
+                              {
+                                 "destination": "10.10.140.11",
+                                 "ports": "1-65535",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.11.12",
+                                 "ports": "1-65535",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.11.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.11.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "udp"
+                              },
+                              {
+                                 "destination": "10.10.137.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.137.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "udp"
+                              },
+                              {
+                                 "destination": "10.10.138.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.138.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "udp"
+                              },
+                              {
+                                 "destination": "10.10.139.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.139.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "udp"
+                              },
+                              {
+                                 "destination": "10.10.10.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.10.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "udp"
+                              },
+                              {
+                                 "destination": "10.10.143.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.143.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "udp"
+                              },
+                              {
+                                 "destination": "10.10.253.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "udp"
+                              },
+                              {
+                                 "destination": "10.10.253.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "tcp"
+                              }
+                           ],
+                           "running_default": true,
+                           "staging_default": true,
+                           "spaces_url": "/v2/security_groups/a42bba51-c8f6-4be9-a401-cb9e4eab834a/spaces",
+                           "staging_spaces_url": "/v2/security_groups/a42bba51-c8f6-4be9-a401-cb9e4eab834a/staging_spaces"
+                        }
+                     },
+                     {
+                        "metadata": {
+                           "guid": "3456b254-c045-4e46-9654-7677831d10f4",
+                           "url": "/v2/security_groups/3456b254-c045-4e46-9654-7677831d10f4",
+                           "created_at": "2017-02-08T23:42:53Z",
+                           "updated_at": "2018-08-22T16:51:21Z"
+                        },
+                        "entity": {
+                           "name": "p.mysql",
+                           "rules": [
+                              {
+                                 "description": "Allow access to MySQL AZ1",
+                                 "destination": "10.10.40.0/24",
+                                 "ports": "3306",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "description": "Allow access to MySQL AZ2",
+                                 "destination": "10.10.41.0/24",
+                                 "ports": "3306",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "description": "Allow access to MySQL AZ3",
+                                 "destination": "10.10.43.0/24",
+                                 "ports": "3306",
+                                 "protocol": "tcp"
+                              }
+                           ],
+                           "running_default": true,
+                           "staging_default": false,
+                           "spaces_url": "/v2/security_groups/3456b254-c045-4e46-9654-7677831d10f4/spaces",
+                           "staging_spaces_url": "/v2/security_groups/3456b254-c045-4e46-9654-7677831d10f4/staging_spaces"
+                        }
+                     },
+                     {
+                        "metadata": {
+                           "guid": "13bc3fda-0d3e-4e8b-a76c-9fbcbba56ec7",
+                           "url": "/v2/security_groups/13bc3fda-0d3e-4e8b-a76c-9fbcbba56ec7",
+                           "created_at": "2017-10-24T14:21:34Z",
+                           "updated_at": "2017-10-24T14:29:42Z"
+                        },
+                        "entity": {
+                           "name": "pcf-rabbitmq-multitenant-prod",
+                           "rules": [
+                              {
+                                 "description": "Allow traffic from cf to RabbitMQ Prod Multitenant HAProxy",
+                                 "destination": "10.10.38.8/32",
+                                 "ports": "5671,5672,1883,8883,61613,61614,15672,15674",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "description": "Allow traffic from cf to RabbitMQ Prod Multitenant HAProxy",
+                                 "destination": "10.10.102.8/32",
+                                 "ports": "5671,5672,1883,8883,61613,61614,15672,15674",
+                                 "protocol": "tcp"
+                              }
+                           ],
+                           "running_default": true,
+                           "staging_default": false,
+                           "spaces_url": "/v2/security_groups/13bc3fda-0d3e-4e8b-a76c-9fbcbba56ec7/spaces",
+                           "staging_spaces_url": "/v2/security_groups/13bc3fda-0d3e-4e8b-a76c-9fbcbba56ec7/staging_spaces"
+                        }
+                     },
+                     {
+                        "metadata": {
+                           "guid": "2c841634-6f59-45c8-911c-c33a56a357ad",
+                           "url": "/v2/security_groups/2c841634-6f59-45c8-911c-c33a56a357ad",
+                           "created_at": "2017-11-14T18:21:43Z",
+                           "updated_at": "2017-11-14T18:22:06Z"
+                        },
+                        "entity": {
+                           "name": "udp80-logging",
+                           "rules": [
+                              {
+                                 "description": "log udp port 80",
+                                 "destination": "0.0.0.0-255.255.255.255",
+                                 "log": true,
+                                 "ports": "80",
+                                 "protocol": "udp"
+                              }
+                           ],
+                           "running_default": true,
+                           "staging_default": false,
+                           "spaces_url": "/v2/security_groups/2c841634-6f59-45c8-911c-c33a56a357ad/spaces",
+                           "staging_spaces_url": "/v2/security_groups/2c841634-6f59-45c8-911c-c33a56a357ad/staging_spaces"
+                        }
+                     },
+                     {
+                        "metadata": {
+                           "guid": "ead5e2c5-8a5a-4f54-a935-02ff3da96e0a",
+                           "url": "/v2/security_groups/ead5e2c5-8a5a-4f54-a935-02ff3da96e0a",
+                           "created_at": "2018-01-11T16:24:20Z",
+                           "updated_at": "2018-01-11T16:25:36Z"
+                        },
+                        "entity": {
+                           "name": "credhub-internal-z3",
+                           "rules": [
+                              {
+                                 "destination": "10.10.16.40",
+                                 "ports": "8844",
+                                 "protocol": "tcp"
+                              }
+                           ],
+                           "running_default": true,
+                           "staging_default": true,
+                           "spaces_url": "/v2/security_groups/ead5e2c5-8a5a-4f54-a935-02ff3da96e0a/spaces",
+                           "staging_spaces_url": "/v2/security_groups/ead5e2c5-8a5a-4f54-a935-02ff3da96e0a/staging_spaces"
+                        }
+                     },
+                     {
+                        "metadata": {
+                           "guid": "28bf55cc-1cf1-4533-88be-87bd21b6b949",
+                           "url": "/v2/security_groups/28bf55cc-1cf1-4533-88be-87bd21b6b949",
+                           "created_at": "2018-01-11T16:24:27Z",
+                           "updated_at": "2018-01-11T16:25:42Z"
+                        },
+                        "entity": {
+                           "name": "credhub-internal-z2",
+                           "rules": [
+                              {
+                                 "destination": "10.10.80.40",
+                                 "ports": "8844",
+                                 "protocol": "tcp"
+                              }
+                           ],
+                           "running_default": true,
+                           "staging_default": true,
+                           "spaces_url": "/v2/security_groups/28bf55cc-1cf1-4533-88be-87bd21b6b949/spaces",
+                           "staging_spaces_url": "/v2/security_groups/28bf55cc-1cf1-4533-88be-87bd21b6b949/staging_spaces"
+                        }
+                     }
+                  ],
+                  "staging_security_groups_url": "/v2/spaces/d2a0e8f9-11a1-4f98-9a78-e6b9fea93fa1/staging_security_groups",
+                  "staging_security_groups": [
+                     {
+                        "metadata": {
+                           "guid": "601d30e6-f16f-4c3d-88ab-723f7c51184a",
+                           "url": "/v2/security_groups/601d30e6-f16f-4c3d-88ab-723f7c51184a",
+                           "created_at": "2014-07-15T18:48:46Z",
+                           "updated_at": null
+                        },
+                        "entity": {
+                           "name": "public_networks",
+                           "rules": [
+                              {
+                                 "destination": "0.0.0.0-9.255.255.255",
+                                 "protocol": "all"
+                              },
+                              {
+                                 "destination": "11.0.0.0-169.253.255.255",
+                                 "protocol": "all"
+                              },
+                              {
+                                 "destination": "169.255.0.0-172.15.255.255",
+                                 "protocol": "all"
+                              },
+                              {
+                                 "destination": "172.32.0.0-192.167.255.255",
+                                 "protocol": "all"
+                              },
+                              {
+                                 "destination": "192.169.0.0-255.255.255.255",
+                                 "protocol": "all"
+                              }
+                           ],
+                           "running_default": true,
+                           "staging_default": true,
+                           "spaces_url": "/v2/security_groups/601d30e6-f16f-4c3d-88ab-723f7c51184a/spaces",
+                           "staging_spaces_url": "/v2/security_groups/601d30e6-f16f-4c3d-88ab-723f7c51184a/staging_spaces"
+                        }
+                     },
+                     {
+                        "metadata": {
+                           "guid": "91b2f6e6-8d38-4c83-88cb-d44e6581d92b",
+                           "url": "/v2/security_groups/91b2f6e6-8d38-4c83-88cb-d44e6581d92b",
+                           "created_at": "2014-07-15T18:48:46Z",
+                           "updated_at": null
+                        },
+                        "entity": {
+                           "name": "dns",
+                           "rules": [
+                              {
+                                 "destination": "0.0.0.0/0",
+                                 "ports": "53",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "0.0.0.0/0",
+                                 "ports": "53",
+                                 "protocol": "udp"
+                              }
+                           ],
+                           "running_default": true,
+                           "staging_default": true,
+                           "spaces_url": "/v2/security_groups/91b2f6e6-8d38-4c83-88cb-d44e6581d92b/spaces",
+                           "staging_spaces_url": "/v2/security_groups/91b2f6e6-8d38-4c83-88cb-d44e6581d92b/staging_spaces"
+                        }
+                     },
+                     {
+                        "metadata": {
+                           "guid": "a42bba51-c8f6-4be9-a401-cb9e4eab834a",
+                           "url": "/v2/security_groups/a42bba51-c8f6-4be9-a401-cb9e4eab834a",
+                           "created_at": "2016-05-27T17:14:23Z",
+                           "updated_at": "2018-09-13T21:01:36Z"
+                        },
+                        "entity": {
+                           "name": "pcf-metrics",
+                           "rules": [
+                              {
+                                 "destination": "10.10.62.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.62.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "udp"
+                              },
+                              {
+                                 "destination": "10.10.9.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.9.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "udp"
+                              },
+                              {
+                                 "destination": "10.10.133.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.133.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "udp"
+                              },
+                              {
+                                 "destination": "10.10.140.11",
+                                 "ports": "1-65535",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.11.12",
+                                 "ports": "1-65535",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.11.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.11.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "udp"
+                              },
+                              {
+                                 "destination": "10.10.137.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.137.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "udp"
+                              },
+                              {
+                                 "destination": "10.10.138.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.138.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "udp"
+                              },
+                              {
+                                 "destination": "10.10.139.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.139.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "udp"
+                              },
+                              {
+                                 "destination": "10.10.10.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.10.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "udp"
+                              },
+                              {
+                                 "destination": "10.10.143.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.143.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "udp"
+                              },
+                              {
+                                 "destination": "10.10.253.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "udp"
+                              },
+                              {
+                                 "destination": "10.10.253.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "tcp"
+                              }
+                           ],
+                           "running_default": true,
+                           "staging_default": true,
+                           "spaces_url": "/v2/security_groups/a42bba51-c8f6-4be9-a401-cb9e4eab834a/spaces",
+                           "staging_spaces_url": "/v2/security_groups/a42bba51-c8f6-4be9-a401-cb9e4eab834a/staging_spaces"
+                        }
+                     },
+                     {
+                        "metadata": {
+                           "guid": "ead5e2c5-8a5a-4f54-a935-02ff3da96e0a",
+                           "url": "/v2/security_groups/ead5e2c5-8a5a-4f54-a935-02ff3da96e0a",
+                           "created_at": "2018-01-11T16:24:20Z",
+                           "updated_at": "2018-01-11T16:25:36Z"
+                        },
+                        "entity": {
+                           "name": "credhub-internal-z3",
+                           "rules": [
+                              {
+                                 "destination": "10.10.16.40",
+                                 "ports": "8844",
+                                 "protocol": "tcp"
+                              }
+                           ],
+                           "running_default": true,
+                           "staging_default": true,
+                           "spaces_url": "/v2/security_groups/ead5e2c5-8a5a-4f54-a935-02ff3da96e0a/spaces",
+                           "staging_spaces_url": "/v2/security_groups/ead5e2c5-8a5a-4f54-a935-02ff3da96e0a/staging_spaces"
+                        }
+                     },
+                     {
+                        "metadata": {
+                           "guid": "28bf55cc-1cf1-4533-88be-87bd21b6b949",
+                           "url": "/v2/security_groups/28bf55cc-1cf1-4533-88be-87bd21b6b949",
+                           "created_at": "2018-01-11T16:24:27Z",
+                           "updated_at": "2018-01-11T16:25:42Z"
+                        },
+                        "entity": {
+                           "name": "credhub-internal-z2",
+                           "rules": [
+                              {
+                                 "destination": "10.10.80.40",
+                                 "ports": "8844",
+                                 "protocol": "tcp"
+                              }
+                           ],
+                           "running_default": true,
+                           "staging_default": true,
+                           "spaces_url": "/v2/security_groups/28bf55cc-1cf1-4533-88be-87bd21b6b949/spaces",
+                           "staging_spaces_url": "/v2/security_groups/28bf55cc-1cf1-4533-88be-87bd21b6b949/staging_spaces"
+                        }
+                     }
+                  ]
+               }
+            },
             "service_plan_url": "/v2/service_plans/fd12a21d-6667-4150-8193-884d083b7874",
+            "service_plan": {
+               "metadata": {
+                  "guid": "fd12a21d-6667-4150-8193-884d083b7874",
+                  "url": "/v2/service_plans/fd12a21d-6667-4150-8193-884d083b7874",
+                  "created_at": "2015-01-19T21:16:31Z",
+                  "updated_at": "2018-11-26T21:50:45Z"
+               },
+               "entity": {
+                  "name": "spark",
+                  "free": true,
+                  "description": "Great for getting started and developing your apps",
+                  "service_guid": "5e30ff7e-d857-4aa7-9eda-7db9a0d7b19b",
+                  "extra": "{\n  \"displayName\": \"Spark DB\",\n  \"bullets\": [\n    \"Price: FREE!\",\n    \"DB size: up to 5 MB\",\n    \"Connections: 4\",\n    \"I/O Performance: Low\",\n    \"Daily Backups\",\n    \"Perfect for proof-of-concept and initial development.\"\n  ],\n  \"costs\": [\n    {\n      \"amount\": {\n        \"usd\": 0\n      },\n      \"unit\": \"MONTHLY\"\n    }\n  ]\n}",
+                  "unique_id": "f6f30bcf-5e1e-467f-b0a6-f221fee91549",
+                  "public": true,
+                  "bindable": true,
+                  "plan_updateable": null,
+                  "active": true,
+                  "maximum_polling_duration": null,
+                  "service_url": "/v2/services/5e30ff7e-d857-4aa7-9eda-7db9a0d7b19b",
+                  "service": {
+                     "metadata": {
+                        "guid": "5e30ff7e-d857-4aa7-9eda-7db9a0d7b19b",
+                        "url": "/v2/services/5e30ff7e-d857-4aa7-9eda-7db9a0d7b19b",
+                        "created_at": "2015-01-19T21:16:29Z",
+                        "updated_at": "2018-11-26T21:50:43Z"
+                     },
+                     "entity": {
+                        "label": "cleardb",
+                        "provider": null,
+                        "url": null,
+                        "description": "Highly available MySQL for your Apps.",
+                        "long_description": null,
+                        "version": null,
+                        "info_url": null,
+                        "active": true,
+                        "bindable": true,
+                        "unique_id": "62139154-ae52-11e3-ac06-22000a1dd446",
+                        "extra": "{\n  \"displayName\": \"ClearDB MySQL Database\",\n  \"imageUrl\": \"https://d3bql97l1ytoxn.cloudfront.net/app_resources/5798/thumbs_64/img2643958825831374083.png\",\n  \"longDescription\": \"ClearDB is a reliable, fault tolerant, geo-distributed\\ndatabase-as-a-service for your MySQL powered applications\",\n  \"providerDisplayName\": \"SuccessBricks, Inc. DBA ClearDB\",\n  \"documentationUrl\": \"http://docs.run.pivotal.io/marketplace/services/cleardb.html\",\n  \"supportUrl\": \"http://cleardb.com\"\n}",
+                        "tags": [
+                           "Data Stores",
+                           "Cloud Databases",
+                           "Developer Tools",
+                           "Web-based",
+                           "Data Store",
+                           "Development and Test Tools",
+                           "Online Backup & Storage",
+                           "Single Sign-On",
+                           "Buyable",
+                           "mysql",
+                           "relational",
+                           "Cloud Security and Monitoring"
+                        ],
+                        "requires": [],
+                        "documentation_url": null,
+                        "service_broker_guid": "bb6733db-3bdc-4d6d-bc5a-63e9bbc1f4de",
+                        "service_broker_name": "appdirect",
+                        "plan_updateable": false,
+                        "bindings_retrievable": false,
+                        "instances_retrievable": false,
+                        "allow_context_updates": false,
+                        "service_plans_url": "/v2/services/5e30ff7e-d857-4aa7-9eda-7db9a0d7b19b/service_plans"
+                     }
+                  },
+                  "service_instances_url": "/v2/service_plans/fd12a21d-6667-4150-8193-884d083b7874/service_instances",
+                  "schemas": {
+                     "service_instance": {
+                        "create": {
+                           "parameters": {}
+                        },
+                        "update": {
+                           "parameters": {}
+                        }
+                     },
+                     "service_binding": {
+                        "create": {
+                           "parameters": {}
+                        }
+                     }
+                  }
+               }
+            },
             "service_bindings_url": "/v2/service_instances/31e3efc1-1898-4156-b936-a666131483e1/service_bindings",
+            "service_bindings": [],
             "service_keys_url": "/v2/service_instances/31e3efc1-1898-4156-b936-a666131483e1/service_keys",
+            "service_keys": [],
             "routes_url": "/v2/service_instances/31e3efc1-1898-4156-b936-a666131483e1/routes",
+            "routes": [],
             "service_url": "/v2/services/5e30ff7e-d857-4aa7-9eda-7db9a0d7b19b",
             "shared_from_url": "/v2/service_instances/31e3efc1-1898-4156-b936-a666131483e1/shared_from",
             "shared_to_url": "/v2/service_instances/31e3efc1-1898-4156-b936-a666131483e1/shared_to",
@@ -64,10 +1059,1005 @@
             "tags": [],
             "service_guid": "5e30ff7e-d857-4aa7-9eda-7db9a0d7b19b",
             "space_url": "/v2/spaces/d2a0e8f9-11a1-4f98-9a78-e6b9fea93fa1",
+            "space": {
+               "metadata": {
+                  "guid": "d2a0e8f9-11a1-4f98-9a78-e6b9fea93fa1",
+                  "url": "/v2/spaces/d2a0e8f9-11a1-4f98-9a78-e6b9fea93fa1",
+                  "created_at": "2019-05-06T21:10:50Z",
+                  "updated_at": "2019-05-06T21:10:50Z"
+               },
+               "entity": {
+                  "name": "test-space",
+                  "organization_guid": "a8cdec69-4f9e-481b-ae24-f1ebad143d96",
+                  "space_quota_definition_guid": null,
+                  "isolation_segment_guid": null,
+                  "allow_ssh": true,
+                  "organization_url": "/v2/organizations/a8cdec69-4f9e-481b-ae24-f1ebad143d96",
+                  "organization": {
+                     "metadata": {
+                        "guid": "a8cdec69-4f9e-481b-ae24-f1ebad143d96",
+                        "url": "/v2/organizations/a8cdec69-4f9e-481b-ae24-f1ebad143d96",
+                        "created_at": "2019-05-06T21:10:50Z",
+                        "updated_at": "2019-05-06T21:10:50Z"
+                     },
+                     "entity": {
+                        "name": "test-org",
+                        "billing_enabled": false,
+                        "quota_definition_guid": "b72b1acb-ff4f-468d-99c0-05cd91012b62",
+                        "status": "active",
+                        "default_isolation_segment_guid": null,
+                        "quota_definition_url": "/v2/quota_definitions/b72b1acb-ff4f-468d-99c0-05cd91012b62",
+                        "spaces_url": "/v2/organizations/a8cdec69-4f9e-481b-ae24-f1ebad143d96/spaces",
+                        "domains_url": "/v2/organizations/a8cdec69-4f9e-481b-ae24-f1ebad143d96/domains",
+                        "private_domains_url": "/v2/organizations/a8cdec69-4f9e-481b-ae24-f1ebad143d96/private_domains",
+                        "users_url": "/v2/organizations/a8cdec69-4f9e-481b-ae24-f1ebad143d96/users",
+                        "managers_url": "/v2/organizations/a8cdec69-4f9e-481b-ae24-f1ebad143d96/managers",
+                        "billing_managers_url": "/v2/organizations/a8cdec69-4f9e-481b-ae24-f1ebad143d96/billing_managers",
+                        "auditors_url": "/v2/organizations/a8cdec69-4f9e-481b-ae24-f1ebad143d96/auditors",
+                        "app_events_url": "/v2/organizations/a8cdec69-4f9e-481b-ae24-f1ebad143d96/app_events",
+                        "space_quota_definitions_url": "/v2/organizations/a8cdec69-4f9e-481b-ae24-f1ebad143d96/space_quota_definitions"
+                     }
+                  },
+                  "developers_url": "/v2/spaces/d2a0e8f9-11a1-4f98-9a78-e6b9fea93fa1/developers",
+                  "developers": [
+                     {
+                        "metadata": {
+                           "guid": "c27397e6-4476-48b3-b452-1350a71b76df",
+                           "url": "/v2/users/c27397e6-4476-48b3-b452-1350a71b76df",
+                           "created_at": "2014-10-06T22:27:43Z",
+                           "updated_at": "2014-11-26T23:05:23Z"
+                        },
+                        "entity": {
+                           "admin": false,
+                           "active": false,
+                           "default_space_guid": null,
+                           "spaces_url": "/v2/users/c27397e6-4476-48b3-b452-1350a71b76df/spaces",
+                           "organizations_url": "/v2/users/c27397e6-4476-48b3-b452-1350a71b76df/organizations",
+                           "managed_organizations_url": "/v2/users/c27397e6-4476-48b3-b452-1350a71b76df/managed_organizations",
+                           "billing_managed_organizations_url": "/v2/users/c27397e6-4476-48b3-b452-1350a71b76df/billing_managed_organizations",
+                           "audited_organizations_url": "/v2/users/c27397e6-4476-48b3-b452-1350a71b76df/audited_organizations",
+                           "managed_spaces_url": "/v2/users/c27397e6-4476-48b3-b452-1350a71b76df/managed_spaces",
+                           "audited_spaces_url": "/v2/users/c27397e6-4476-48b3-b452-1350a71b76df/audited_spaces"
+                        }
+                     }
+                  ],
+                  "managers_url": "/v2/spaces/d2a0e8f9-11a1-4f98-9a78-e6b9fea93fa1/managers",
+                  "managers": [
+                     {
+                        "metadata": {
+                           "guid": "c27397e6-4476-48b3-b452-1350a71b76df",
+                           "url": "/v2/users/c27397e6-4476-48b3-b452-1350a71b76df",
+                           "created_at": "2014-10-06T22:27:43Z",
+                           "updated_at": "2014-11-26T23:05:23Z"
+                        },
+                        "entity": {
+                           "admin": false,
+                           "active": false,
+                           "default_space_guid": null,
+                           "spaces_url": "/v2/users/c27397e6-4476-48b3-b452-1350a71b76df/spaces",
+                           "organizations_url": "/v2/users/c27397e6-4476-48b3-b452-1350a71b76df/organizations",
+                           "managed_organizations_url": "/v2/users/c27397e6-4476-48b3-b452-1350a71b76df/managed_organizations",
+                           "billing_managed_organizations_url": "/v2/users/c27397e6-4476-48b3-b452-1350a71b76df/billing_managed_organizations",
+                           "audited_organizations_url": "/v2/users/c27397e6-4476-48b3-b452-1350a71b76df/audited_organizations",
+                           "managed_spaces_url": "/v2/users/c27397e6-4476-48b3-b452-1350a71b76df/managed_spaces",
+                           "audited_spaces_url": "/v2/users/c27397e6-4476-48b3-b452-1350a71b76df/audited_spaces"
+                        }
+                     }
+                  ],
+                  "auditors_url": "/v2/spaces/d2a0e8f9-11a1-4f98-9a78-e6b9fea93fa1/auditors",
+                  "auditors": [
+                     {
+                        "metadata": {
+                           "guid": "c27397e6-4476-48b3-b452-1350a71b76df",
+                           "url": "/v2/users/c27397e6-4476-48b3-b452-1350a71b76df",
+                           "created_at": "2014-10-06T22:27:43Z",
+                           "updated_at": "2014-11-26T23:05:23Z"
+                        },
+                        "entity": {
+                           "admin": false,
+                           "active": false,
+                           "default_space_guid": null,
+                           "spaces_url": "/v2/users/c27397e6-4476-48b3-b452-1350a71b76df/spaces",
+                           "organizations_url": "/v2/users/c27397e6-4476-48b3-b452-1350a71b76df/organizations",
+                           "managed_organizations_url": "/v2/users/c27397e6-4476-48b3-b452-1350a71b76df/managed_organizations",
+                           "billing_managed_organizations_url": "/v2/users/c27397e6-4476-48b3-b452-1350a71b76df/billing_managed_organizations",
+                           "audited_organizations_url": "/v2/users/c27397e6-4476-48b3-b452-1350a71b76df/audited_organizations",
+                           "managed_spaces_url": "/v2/users/c27397e6-4476-48b3-b452-1350a71b76df/managed_spaces",
+                           "audited_spaces_url": "/v2/users/c27397e6-4476-48b3-b452-1350a71b76df/audited_spaces"
+                        }
+                     }
+                  ],
+                  "apps_url": "/v2/spaces/d2a0e8f9-11a1-4f98-9a78-e6b9fea93fa1/apps",
+                  "apps": [],
+                  "routes_url": "/v2/spaces/d2a0e8f9-11a1-4f98-9a78-e6b9fea93fa1/routes",
+                  "routes": [],
+                  "domains_url": "/v2/spaces/d2a0e8f9-11a1-4f98-9a78-e6b9fea93fa1/domains",
+                  "domains": [
+                     {
+                        "metadata": {
+                           "guid": "fb6bd89f-2ed9-49d4-9ad1-97951a573135",
+                           "url": "/v2/shared_domains/fb6bd89f-2ed9-49d4-9ad1-97951a573135",
+                           "created_at": "2013-05-04T00:29:46Z",
+                           "updated_at": "2019-02-08T20:18:20Z"
+                        },
+                        "entity": {
+                           "name": "cfapps.io",
+                           "internal": false,
+                           "router_group_guid": null,
+                           "router_group_type": null
+                        }
+                     },
+                     {
+                        "metadata": {
+                           "guid": "d42961c0-8361-4d60-bf58-9a3c1f09600a",
+                           "url": "/v2/shared_domains/d42961c0-8361-4d60-bf58-9a3c1f09600a",
+                           "created_at": "2016-09-08T21:22:28Z",
+                           "updated_at": null
+                        },
+                        "entity": {
+                           "name": "cf-tcpapps.io",
+                           "internal": false,
+                           "router_group_guid": "ac86636b-fc8b-46d7-49c4-edce5118daf2",
+                           "router_group_type": null
+                        }
+                     },
+                     {
+                        "metadata": {
+                           "guid": "f6ed3f6b-f051-4f09-8d88-f95c09e7cf0f",
+                           "url": "/v2/shared_domains/f6ed3f6b-f051-4f09-8d88-f95c09e7cf0f",
+                           "created_at": "2018-02-15T01:15:55Z",
+                           "updated_at": "2018-02-15T01:15:55Z"
+                        },
+                        "entity": {
+                           "name": "apps.internal",
+                           "internal": true,
+                           "router_group_guid": null,
+                           "router_group_type": null
+                        }
+                     }
+                  ],
+                  "service_instances_url": "/v2/spaces/d2a0e8f9-11a1-4f98-9a78-e6b9fea93fa1/service_instances",
+                  "app_events_url": "/v2/spaces/d2a0e8f9-11a1-4f98-9a78-e6b9fea93fa1/app_events",
+                  "events_url": "/v2/spaces/d2a0e8f9-11a1-4f98-9a78-e6b9fea93fa1/events",
+                  "security_groups_url": "/v2/spaces/d2a0e8f9-11a1-4f98-9a78-e6b9fea93fa1/security_groups",
+                  "security_groups": [
+                     {
+                        "metadata": {
+                           "guid": "601d30e6-f16f-4c3d-88ab-723f7c51184a",
+                           "url": "/v2/security_groups/601d30e6-f16f-4c3d-88ab-723f7c51184a",
+                           "created_at": "2014-07-15T18:48:46Z",
+                           "updated_at": null
+                        },
+                        "entity": {
+                           "name": "public_networks",
+                           "rules": [
+                              {
+                                 "destination": "0.0.0.0-9.255.255.255",
+                                 "protocol": "all"
+                              },
+                              {
+                                 "destination": "11.0.0.0-169.253.255.255",
+                                 "protocol": "all"
+                              },
+                              {
+                                 "destination": "169.255.0.0-172.15.255.255",
+                                 "protocol": "all"
+                              },
+                              {
+                                 "destination": "172.32.0.0-192.167.255.255",
+                                 "protocol": "all"
+                              },
+                              {
+                                 "destination": "192.169.0.0-255.255.255.255",
+                                 "protocol": "all"
+                              }
+                           ],
+                           "running_default": true,
+                           "staging_default": true,
+                           "spaces_url": "/v2/security_groups/601d30e6-f16f-4c3d-88ab-723f7c51184a/spaces",
+                           "staging_spaces_url": "/v2/security_groups/601d30e6-f16f-4c3d-88ab-723f7c51184a/staging_spaces"
+                        }
+                     },
+                     {
+                        "metadata": {
+                           "guid": "91b2f6e6-8d38-4c83-88cb-d44e6581d92b",
+                           "url": "/v2/security_groups/91b2f6e6-8d38-4c83-88cb-d44e6581d92b",
+                           "created_at": "2014-07-15T18:48:46Z",
+                           "updated_at": null
+                        },
+                        "entity": {
+                           "name": "dns",
+                           "rules": [
+                              {
+                                 "destination": "0.0.0.0/0",
+                                 "ports": "53",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "0.0.0.0/0",
+                                 "ports": "53",
+                                 "protocol": "udp"
+                              }
+                           ],
+                           "running_default": true,
+                           "staging_default": true,
+                           "spaces_url": "/v2/security_groups/91b2f6e6-8d38-4c83-88cb-d44e6581d92b/spaces",
+                           "staging_spaces_url": "/v2/security_groups/91b2f6e6-8d38-4c83-88cb-d44e6581d92b/staging_spaces"
+                        }
+                     },
+                     {
+                        "metadata": {
+                           "guid": "cf0bc380-857d-40cf-a20a-f6c1f0228b45",
+                           "url": "/v2/security_groups/cf0bc380-857d-40cf-a20a-f6c1f0228b45",
+                           "created_at": "2015-03-10T18:00:45Z",
+                           "updated_at": "2015-03-10T18:01:14Z"
+                        },
+                        "entity": {
+                           "name": "ssh-logging",
+                           "rules": [
+                              {
+                                 "destination": "0.0.0.0/0",
+                                 "log": true,
+                                 "ports": "22",
+                                 "protocol": "tcp"
+                              }
+                           ],
+                           "running_default": true,
+                           "staging_default": false,
+                           "spaces_url": "/v2/security_groups/cf0bc380-857d-40cf-a20a-f6c1f0228b45/spaces",
+                           "staging_spaces_url": "/v2/security_groups/cf0bc380-857d-40cf-a20a-f6c1f0228b45/staging_spaces"
+                        }
+                     },
+                     {
+                        "metadata": {
+                           "guid": "27e106c0-cc2d-4c0a-b293-b51c1cc4c515",
+                           "url": "/v2/security_groups/27e106c0-cc2d-4c0a-b293-b51c1cc4c515",
+                           "created_at": "2015-03-10T18:00:53Z",
+                           "updated_at": "2015-07-28T00:45:49Z"
+                        },
+                        "entity": {
+                           "name": "p-mysql",
+                           "rules": [
+                              {
+                                 "destination": "10.10.2.0/24",
+                                 "ports": "3306",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.66.0/24",
+                                 "ports": "3306",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.130.0/24",
+                                 "ports": "3306",
+                                 "protocol": "tcp"
+                              }
+                           ],
+                           "running_default": true,
+                           "staging_default": false,
+                           "spaces_url": "/v2/security_groups/27e106c0-cc2d-4c0a-b293-b51c1cc4c515/spaces",
+                           "staging_spaces_url": "/v2/security_groups/27e106c0-cc2d-4c0a-b293-b51c1cc4c515/staging_spaces"
+                        }
+                     },
+                     {
+                        "metadata": {
+                           "guid": "bff21eb5-afb9-4826-bc80-0c8d46d6d035",
+                           "url": "/v2/security_groups/bff21eb5-afb9-4826-bc80-0c8d46d6d035",
+                           "created_at": "2015-08-07T17:22:21Z",
+                           "updated_at": "2018-03-29T13:55:48Z"
+                        },
+                        "entity": {
+                           "name": "pcf-redis",
+                           "rules": [
+                              {
+                                 "destination": "10.10.7.0/24",
+                                 "ports": "6379",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.7.13/32",
+                                 "ports": "32768-61000",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.168.0/22",
+                                 "ports": "6379",
+                                 "protocol": "tcp"
+                              }
+                           ],
+                           "running_default": true,
+                           "staging_default": false,
+                           "spaces_url": "/v2/security_groups/bff21eb5-afb9-4826-bc80-0c8d46d6d035/spaces",
+                           "staging_spaces_url": "/v2/security_groups/bff21eb5-afb9-4826-bc80-0c8d46d6d035/staging_spaces"
+                        }
+                     },
+                     {
+                        "metadata": {
+                           "guid": "a5eafd3f-414c-4a21-a951-4693de3051ae",
+                           "url": "/v2/security_groups/a5eafd3f-414c-4a21-a951-4693de3051ae",
+                           "created_at": "2015-11-21T01:16:35Z",
+                           "updated_at": "2016-04-12T21:07:30Z"
+                        },
+                        "entity": {
+                           "name": "rabbitmq",
+                           "rules": [
+                              {
+                                 "destination": "10.10.38.8/32",
+                                 "ports": "5672",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.38.8/32",
+                                 "ports": "5671",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.38.8/32",
+                                 "ports": "1883",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.38.8/32",
+                                 "ports": "8883",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.38.8/32",
+                                 "ports": "61613",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.38.8/32",
+                                 "ports": "61614",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.38.8/32",
+                                 "ports": "15672",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.38.8/32",
+                                 "ports": "15674",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.102.8/32",
+                                 "ports": "5672",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.102.8/32",
+                                 "ports": "5671",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.102.8/32",
+                                 "ports": "1883",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.102.8/32",
+                                 "ports": "8883",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.102.8/32",
+                                 "ports": "61613",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.102.8/32",
+                                 "ports": "61614",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.102.8/32",
+                                 "ports": "15672",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.102.8/32",
+                                 "ports": "15674",
+                                 "protocol": "tcp"
+                              }
+                           ],
+                           "running_default": true,
+                           "staging_default": false,
+                           "spaces_url": "/v2/security_groups/a5eafd3f-414c-4a21-a951-4693de3051ae/spaces",
+                           "staging_spaces_url": "/v2/security_groups/a5eafd3f-414c-4a21-a951-4693de3051ae/staging_spaces"
+                        }
+                     },
+                     {
+                        "metadata": {
+                           "guid": "a42bba51-c8f6-4be9-a401-cb9e4eab834a",
+                           "url": "/v2/security_groups/a42bba51-c8f6-4be9-a401-cb9e4eab834a",
+                           "created_at": "2016-05-27T17:14:23Z",
+                           "updated_at": "2018-09-13T21:01:36Z"
+                        },
+                        "entity": {
+                           "name": "pcf-metrics",
+                           "rules": [
+                              {
+                                 "destination": "10.10.62.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.62.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "udp"
+                              },
+                              {
+                                 "destination": "10.10.9.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.9.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "udp"
+                              },
+                              {
+                                 "destination": "10.10.133.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.133.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "udp"
+                              },
+                              {
+                                 "destination": "10.10.140.11",
+                                 "ports": "1-65535",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.11.12",
+                                 "ports": "1-65535",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.11.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.11.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "udp"
+                              },
+                              {
+                                 "destination": "10.10.137.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.137.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "udp"
+                              },
+                              {
+                                 "destination": "10.10.138.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.138.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "udp"
+                              },
+                              {
+                                 "destination": "10.10.139.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.139.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "udp"
+                              },
+                              {
+                                 "destination": "10.10.10.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.10.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "udp"
+                              },
+                              {
+                                 "destination": "10.10.143.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.143.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "udp"
+                              },
+                              {
+                                 "destination": "10.10.253.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "udp"
+                              },
+                              {
+                                 "destination": "10.10.253.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "tcp"
+                              }
+                           ],
+                           "running_default": true,
+                           "staging_default": true,
+                           "spaces_url": "/v2/security_groups/a42bba51-c8f6-4be9-a401-cb9e4eab834a/spaces",
+                           "staging_spaces_url": "/v2/security_groups/a42bba51-c8f6-4be9-a401-cb9e4eab834a/staging_spaces"
+                        }
+                     },
+                     {
+                        "metadata": {
+                           "guid": "3456b254-c045-4e46-9654-7677831d10f4",
+                           "url": "/v2/security_groups/3456b254-c045-4e46-9654-7677831d10f4",
+                           "created_at": "2017-02-08T23:42:53Z",
+                           "updated_at": "2018-08-22T16:51:21Z"
+                        },
+                        "entity": {
+                           "name": "p.mysql",
+                           "rules": [
+                              {
+                                 "description": "Allow access to MySQL AZ1",
+                                 "destination": "10.10.40.0/24",
+                                 "ports": "3306",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "description": "Allow access to MySQL AZ2",
+                                 "destination": "10.10.41.0/24",
+                                 "ports": "3306",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "description": "Allow access to MySQL AZ3",
+                                 "destination": "10.10.43.0/24",
+                                 "ports": "3306",
+                                 "protocol": "tcp"
+                              }
+                           ],
+                           "running_default": true,
+                           "staging_default": false,
+                           "spaces_url": "/v2/security_groups/3456b254-c045-4e46-9654-7677831d10f4/spaces",
+                           "staging_spaces_url": "/v2/security_groups/3456b254-c045-4e46-9654-7677831d10f4/staging_spaces"
+                        }
+                     },
+                     {
+                        "metadata": {
+                           "guid": "13bc3fda-0d3e-4e8b-a76c-9fbcbba56ec7",
+                           "url": "/v2/security_groups/13bc3fda-0d3e-4e8b-a76c-9fbcbba56ec7",
+                           "created_at": "2017-10-24T14:21:34Z",
+                           "updated_at": "2017-10-24T14:29:42Z"
+                        },
+                        "entity": {
+                           "name": "pcf-rabbitmq-multitenant-prod",
+                           "rules": [
+                              {
+                                 "description": "Allow traffic from cf to RabbitMQ Prod Multitenant HAProxy",
+                                 "destination": "10.10.38.8/32",
+                                 "ports": "5671,5672,1883,8883,61613,61614,15672,15674",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "description": "Allow traffic from cf to RabbitMQ Prod Multitenant HAProxy",
+                                 "destination": "10.10.102.8/32",
+                                 "ports": "5671,5672,1883,8883,61613,61614,15672,15674",
+                                 "protocol": "tcp"
+                              }
+                           ],
+                           "running_default": true,
+                           "staging_default": false,
+                           "spaces_url": "/v2/security_groups/13bc3fda-0d3e-4e8b-a76c-9fbcbba56ec7/spaces",
+                           "staging_spaces_url": "/v2/security_groups/13bc3fda-0d3e-4e8b-a76c-9fbcbba56ec7/staging_spaces"
+                        }
+                     },
+                     {
+                        "metadata": {
+                           "guid": "2c841634-6f59-45c8-911c-c33a56a357ad",
+                           "url": "/v2/security_groups/2c841634-6f59-45c8-911c-c33a56a357ad",
+                           "created_at": "2017-11-14T18:21:43Z",
+                           "updated_at": "2017-11-14T18:22:06Z"
+                        },
+                        "entity": {
+                           "name": "udp80-logging",
+                           "rules": [
+                              {
+                                 "description": "log udp port 80",
+                                 "destination": "0.0.0.0-255.255.255.255",
+                                 "log": true,
+                                 "ports": "80",
+                                 "protocol": "udp"
+                              }
+                           ],
+                           "running_default": true,
+                           "staging_default": false,
+                           "spaces_url": "/v2/security_groups/2c841634-6f59-45c8-911c-c33a56a357ad/spaces",
+                           "staging_spaces_url": "/v2/security_groups/2c841634-6f59-45c8-911c-c33a56a357ad/staging_spaces"
+                        }
+                     },
+                     {
+                        "metadata": {
+                           "guid": "ead5e2c5-8a5a-4f54-a935-02ff3da96e0a",
+                           "url": "/v2/security_groups/ead5e2c5-8a5a-4f54-a935-02ff3da96e0a",
+                           "created_at": "2018-01-11T16:24:20Z",
+                           "updated_at": "2018-01-11T16:25:36Z"
+                        },
+                        "entity": {
+                           "name": "credhub-internal-z3",
+                           "rules": [
+                              {
+                                 "destination": "10.10.16.40",
+                                 "ports": "8844",
+                                 "protocol": "tcp"
+                              }
+                           ],
+                           "running_default": true,
+                           "staging_default": true,
+                           "spaces_url": "/v2/security_groups/ead5e2c5-8a5a-4f54-a935-02ff3da96e0a/spaces",
+                           "staging_spaces_url": "/v2/security_groups/ead5e2c5-8a5a-4f54-a935-02ff3da96e0a/staging_spaces"
+                        }
+                     },
+                     {
+                        "metadata": {
+                           "guid": "28bf55cc-1cf1-4533-88be-87bd21b6b949",
+                           "url": "/v2/security_groups/28bf55cc-1cf1-4533-88be-87bd21b6b949",
+                           "created_at": "2018-01-11T16:24:27Z",
+                           "updated_at": "2018-01-11T16:25:42Z"
+                        },
+                        "entity": {
+                           "name": "credhub-internal-z2",
+                           "rules": [
+                              {
+                                 "destination": "10.10.80.40",
+                                 "ports": "8844",
+                                 "protocol": "tcp"
+                              }
+                           ],
+                           "running_default": true,
+                           "staging_default": true,
+                           "spaces_url": "/v2/security_groups/28bf55cc-1cf1-4533-88be-87bd21b6b949/spaces",
+                           "staging_spaces_url": "/v2/security_groups/28bf55cc-1cf1-4533-88be-87bd21b6b949/staging_spaces"
+                        }
+                     }
+                  ],
+                  "staging_security_groups_url": "/v2/spaces/d2a0e8f9-11a1-4f98-9a78-e6b9fea93fa1/staging_security_groups",
+                  "staging_security_groups": [
+                     {
+                        "metadata": {
+                           "guid": "601d30e6-f16f-4c3d-88ab-723f7c51184a",
+                           "url": "/v2/security_groups/601d30e6-f16f-4c3d-88ab-723f7c51184a",
+                           "created_at": "2014-07-15T18:48:46Z",
+                           "updated_at": null
+                        },
+                        "entity": {
+                           "name": "public_networks",
+                           "rules": [
+                              {
+                                 "destination": "0.0.0.0-9.255.255.255",
+                                 "protocol": "all"
+                              },
+                              {
+                                 "destination": "11.0.0.0-169.253.255.255",
+                                 "protocol": "all"
+                              },
+                              {
+                                 "destination": "169.255.0.0-172.15.255.255",
+                                 "protocol": "all"
+                              },
+                              {
+                                 "destination": "172.32.0.0-192.167.255.255",
+                                 "protocol": "all"
+                              },
+                              {
+                                 "destination": "192.169.0.0-255.255.255.255",
+                                 "protocol": "all"
+                              }
+                           ],
+                           "running_default": true,
+                           "staging_default": true,
+                           "spaces_url": "/v2/security_groups/601d30e6-f16f-4c3d-88ab-723f7c51184a/spaces",
+                           "staging_spaces_url": "/v2/security_groups/601d30e6-f16f-4c3d-88ab-723f7c51184a/staging_spaces"
+                        }
+                     },
+                     {
+                        "metadata": {
+                           "guid": "91b2f6e6-8d38-4c83-88cb-d44e6581d92b",
+                           "url": "/v2/security_groups/91b2f6e6-8d38-4c83-88cb-d44e6581d92b",
+                           "created_at": "2014-07-15T18:48:46Z",
+                           "updated_at": null
+                        },
+                        "entity": {
+                           "name": "dns",
+                           "rules": [
+                              {
+                                 "destination": "0.0.0.0/0",
+                                 "ports": "53",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "0.0.0.0/0",
+                                 "ports": "53",
+                                 "protocol": "udp"
+                              }
+                           ],
+                           "running_default": true,
+                           "staging_default": true,
+                           "spaces_url": "/v2/security_groups/91b2f6e6-8d38-4c83-88cb-d44e6581d92b/spaces",
+                           "staging_spaces_url": "/v2/security_groups/91b2f6e6-8d38-4c83-88cb-d44e6581d92b/staging_spaces"
+                        }
+                     },
+                     {
+                        "metadata": {
+                           "guid": "a42bba51-c8f6-4be9-a401-cb9e4eab834a",
+                           "url": "/v2/security_groups/a42bba51-c8f6-4be9-a401-cb9e4eab834a",
+                           "created_at": "2016-05-27T17:14:23Z",
+                           "updated_at": "2018-09-13T21:01:36Z"
+                        },
+                        "entity": {
+                           "name": "pcf-metrics",
+                           "rules": [
+                              {
+                                 "destination": "10.10.62.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.62.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "udp"
+                              },
+                              {
+                                 "destination": "10.10.9.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.9.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "udp"
+                              },
+                              {
+                                 "destination": "10.10.133.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.133.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "udp"
+                              },
+                              {
+                                 "destination": "10.10.140.11",
+                                 "ports": "1-65535",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.11.12",
+                                 "ports": "1-65535",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.11.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.11.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "udp"
+                              },
+                              {
+                                 "destination": "10.10.137.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.137.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "udp"
+                              },
+                              {
+                                 "destination": "10.10.138.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.138.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "udp"
+                              },
+                              {
+                                 "destination": "10.10.139.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.139.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "udp"
+                              },
+                              {
+                                 "destination": "10.10.10.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.10.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "udp"
+                              },
+                              {
+                                 "destination": "10.10.143.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "tcp"
+                              },
+                              {
+                                 "destination": "10.10.143.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "udp"
+                              },
+                              {
+                                 "destination": "10.10.253.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "udp"
+                              },
+                              {
+                                 "destination": "10.10.253.0/24",
+                                 "ports": "1-65535",
+                                 "protocol": "tcp"
+                              }
+                           ],
+                           "running_default": true,
+                           "staging_default": true,
+                           "spaces_url": "/v2/security_groups/a42bba51-c8f6-4be9-a401-cb9e4eab834a/spaces",
+                           "staging_spaces_url": "/v2/security_groups/a42bba51-c8f6-4be9-a401-cb9e4eab834a/staging_spaces"
+                        }
+                     },
+                     {
+                        "metadata": {
+                           "guid": "ead5e2c5-8a5a-4f54-a935-02ff3da96e0a",
+                           "url": "/v2/security_groups/ead5e2c5-8a5a-4f54-a935-02ff3da96e0a",
+                           "created_at": "2018-01-11T16:24:20Z",
+                           "updated_at": "2018-01-11T16:25:36Z"
+                        },
+                        "entity": {
+                           "name": "credhub-internal-z3",
+                           "rules": [
+                              {
+                                 "destination": "10.10.16.40",
+                                 "ports": "8844",
+                                 "protocol": "tcp"
+                              }
+                           ],
+                           "running_default": true,
+                           "staging_default": true,
+                           "spaces_url": "/v2/security_groups/ead5e2c5-8a5a-4f54-a935-02ff3da96e0a/spaces",
+                           "staging_spaces_url": "/v2/security_groups/ead5e2c5-8a5a-4f54-a935-02ff3da96e0a/staging_spaces"
+                        }
+                     },
+                     {
+                        "metadata": {
+                           "guid": "28bf55cc-1cf1-4533-88be-87bd21b6b949",
+                           "url": "/v2/security_groups/28bf55cc-1cf1-4533-88be-87bd21b6b949",
+                           "created_at": "2018-01-11T16:24:27Z",
+                           "updated_at": "2018-01-11T16:25:42Z"
+                        },
+                        "entity": {
+                           "name": "credhub-internal-z2",
+                           "rules": [
+                              {
+                                 "destination": "10.10.80.40",
+                                 "ports": "8844",
+                                 "protocol": "tcp"
+                              }
+                           ],
+                           "running_default": true,
+                           "staging_default": true,
+                           "spaces_url": "/v2/security_groups/28bf55cc-1cf1-4533-88be-87bd21b6b949/spaces",
+                           "staging_spaces_url": "/v2/security_groups/28bf55cc-1cf1-4533-88be-87bd21b6b949/staging_spaces"
+                        }
+                     }
+                  ]
+               }
+            },
             "service_plan_url": "/v2/service_plans/fd12a21d-6667-4150-8193-884d083b7874",
+            "service_plan": {
+               "metadata": {
+                  "guid": "fd12a21d-6667-4150-8193-884d083b7874",
+                  "url": "/v2/service_plans/fd12a21d-6667-4150-8193-884d083b7874",
+                  "created_at": "2015-01-19T21:16:31Z",
+                  "updated_at": "2018-11-26T21:50:45Z"
+               },
+               "entity": {
+                  "name": "spark",
+                  "free": true,
+                  "description": "Great for getting started and developing your apps",
+                  "service_guid": "5e30ff7e-d857-4aa7-9eda-7db9a0d7b19b",
+                  "extra": "{\n  \"displayName\": \"Spark DB\",\n  \"bullets\": [\n    \"Price: FREE!\",\n    \"DB size: up to 5 MB\",\n    \"Connections: 4\",\n    \"I/O Performance: Low\",\n    \"Daily Backups\",\n    \"Perfect for proof-of-concept and initial development.\"\n  ],\n  \"costs\": [\n    {\n      \"amount\": {\n        \"usd\": 0\n      },\n      \"unit\": \"MONTHLY\"\n    }\n  ]\n}",
+                  "unique_id": "f6f30bcf-5e1e-467f-b0a6-f221fee91549",
+                  "public": true,
+                  "bindable": true,
+                  "plan_updateable": null,
+                  "active": true,
+                  "maximum_polling_duration": null,
+                  "service_url": "/v2/services/5e30ff7e-d857-4aa7-9eda-7db9a0d7b19b",
+                  "service": {
+                     "metadata": {
+                        "guid": "5e30ff7e-d857-4aa7-9eda-7db9a0d7b19b",
+                        "url": "/v2/services/5e30ff7e-d857-4aa7-9eda-7db9a0d7b19b",
+                        "created_at": "2015-01-19T21:16:29Z",
+                        "updated_at": "2018-11-26T21:50:43Z"
+                     },
+                     "entity": {
+                        "label": "cleardb",
+                        "provider": null,
+                        "url": null,
+                        "description": "Highly available MySQL for your Apps.",
+                        "long_description": null,
+                        "version": null,
+                        "info_url": null,
+                        "active": true,
+                        "bindable": true,
+                        "unique_id": "62139154-ae52-11e3-ac06-22000a1dd446",
+                        "extra": "{\n  \"displayName\": \"ClearDB MySQL Database\",\n  \"imageUrl\": \"https://d3bql97l1ytoxn.cloudfront.net/app_resources/5798/thumbs_64/img2643958825831374083.png\",\n  \"longDescription\": \"ClearDB is a reliable, fault tolerant, geo-distributed\\ndatabase-as-a-service for your MySQL powered applications\",\n  \"providerDisplayName\": \"SuccessBricks, Inc. DBA ClearDB\",\n  \"documentationUrl\": \"http://docs.run.pivotal.io/marketplace/services/cleardb.html\",\n  \"supportUrl\": \"http://cleardb.com\"\n}",
+                        "tags": [
+                           "Data Stores",
+                           "Cloud Databases",
+                           "Developer Tools",
+                           "Web-based",
+                           "Data Store",
+                           "Development and Test Tools",
+                           "Online Backup & Storage",
+                           "Single Sign-On",
+                           "Buyable",
+                           "mysql",
+                           "relational",
+                           "Cloud Security and Monitoring"
+                        ],
+                        "requires": [],
+                        "documentation_url": null,
+                        "service_broker_guid": "bb6733db-3bdc-4d6d-bc5a-63e9bbc1f4de",
+                        "service_broker_name": "appdirect",
+                        "plan_updateable": false,
+                        "bindings_retrievable": false,
+                        "instances_retrievable": false,
+                        "allow_context_updates": false,
+                        "service_plans_url": "/v2/services/5e30ff7e-d857-4aa7-9eda-7db9a0d7b19b/service_plans"
+                     }
+                  },
+                  "service_instances_url": "/v2/service_plans/fd12a21d-6667-4150-8193-884d083b7874/service_instances",
+                  "schemas": {
+                     "service_instance": {
+                        "create": {
+                           "parameters": {}
+                        },
+                        "update": {
+                           "parameters": {}
+                        }
+                     },
+                     "service_binding": {
+                        "create": {
+                           "parameters": {}
+                        }
+                     }
+                  }
+               }
+            },
             "service_bindings_url": "/v2/service_instances/31e3efc1-1898-4156-b936-a666131483e1/service_bindings",
+            "service_bindings": [],
             "service_keys_url": "/v2/service_instances/31e3efc1-1898-4156-b936-a666131483e1/service_keys",
+            "service_keys": [],
             "routes_url": "/v2/service_instances/31e3efc1-1898-4156-b936-a666131483e1/routes",
+            "routes": [],
             "service_url": "/v2/services/5e30ff7e-d857-4aa7-9eda-7db9a0d7b19b",
             "shared_from_url": "/v2/service_instances/31e3efc1-1898-4156-b936-a666131483e1/shared_from",
             "shared_to_url": "/v2/service_instances/31e3efc1-1898-4156-b936-a666131483e1/shared_to",
