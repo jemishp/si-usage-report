@@ -29,6 +29,7 @@ var _ bool = Describe("SiUsageReport", func() {
 			apiHelper               cfapihelper.CFAPIHelper
 			fakeapiHelper           fakes.FakeAPIHelper
 			expectedServiceInstance []cfapihelper.ServiceInstance_Details
+			expectedReport          []Org
 		)
 
 		BeforeEach(func() {
@@ -118,7 +119,7 @@ var _ bool = Describe("SiUsageReport", func() {
 						Expect(outBuffer).To(gbytes.Say("error while getting service instances: CF API returned no output"))
 					})
 				})
-				When("service instances returned are valid json", func() {
+				When("service instances returned are not p.redis, p.pcc, p.mysql or p.rabbit", func() {
 					var expectedSIJSON []byte
 					var err error
 					BeforeEach(func() {
@@ -143,7 +144,56 @@ var _ bool = Describe("SiUsageReport", func() {
 						Expect(err).NotTo(HaveOccurred())
 						Expect(expectedSIJSON).ToNot(BeNil())
 					})
-					It("prints service instance details in json", func() {
+					It("returns an empty list", func() {
+						orgList := subject.GenerateReport(expectedServiceInstance)
+						Expect(len(orgList)).To(Equal(0))
+					})
+				})
+				When("service instances returned are p.redis, p.pcc, p.mysql or p.rabbit", func() {
+					var expectedSIJSON []byte
+					var err error
+					BeforeEach(func() {
+						fakeCLIConnection.IsLoggedInReturns(true, nil)
+						fakeapiHelper = fakes.FakeAPIHelper{
+							CliConnection: fakeCLIConnection,
+						}
+						subject.APIHelper = &fakeapiHelper
+						subject.CliConnection = fakeCLIConnection
+						expectedReport = []Org{
+							{
+								OrgName:              "test-org",
+								SpaceName:            "test-space",
+								ProductName:          "p.mysql",
+								PlanName:             "spark",
+								ServiceInstanceCount: 1,
+							},
+							{
+								OrgName:              "test-org",
+								SpaceName:            "test-space",
+								ProductName:          "p.pcc",
+								PlanName:             "spark",
+								ServiceInstanceCount: 1,
+							},
+							{
+								OrgName:              "test-org",
+								SpaceName:            "test-space",
+								ProductName:          "p.redis",
+								PlanName:             "spark",
+								ServiceInstanceCount: 1,
+							},
+							{
+								OrgName:              "test-org",
+								SpaceName:            "test-space",
+								ProductName:          "p.rabbit",
+								PlanName:             "spark",
+								ServiceInstanceCount: 1,
+							},
+						}
+						expectedSIJSON, err = json.Marshal(expectedReport)
+						Expect(err).NotTo(HaveOccurred())
+						Expect(expectedSIJSON).ToNot(BeNil())
+					})
+					It("prints service instance list in json", func() {
 						subject.GetSIUsageReport([]string{"test"})
 						outJSON := outBuffer.(*gbytes.Buffer).Contents()
 						Expect(outJSON).Should(MatchJSON(expectedSIJSON))

@@ -15,6 +15,18 @@ type SIUsageReport struct {
 	OutBuf        io.Writer
 }
 
+type Report struct {
+	Orgs []Org
+}
+
+type Org struct {
+	OrgName              string
+	SpaceName            string
+	ProductName          string
+	PlanName             string
+	ServiceInstanceCount int
+}
+
 func (s *SIUsageReport) Run(cliConnection plugin.CliConnection, args []string) {
 	// Ensure that we called the command si-usage-report
 	switch args[0] {
@@ -61,7 +73,8 @@ func (s *SIUsageReport) GetSIUsageReport(args []string) {
 		if err != nil {
 			fmt.Fprintf(s.OutBuf, "error while getting service instances: %s", err.Error())
 		} else {
-			sisJSON, err := json.Marshal(sis)
+			report := s.GenerateReport(sis)
+			sisJSON, err := json.Marshal(report)
 			if err != nil {
 				fmt.Fprintf(s.OutBuf, "error converting to json: %s", err.Error())
 			}
@@ -74,4 +87,23 @@ func (s *SIUsageReport) GetSIUsageReport(args []string) {
 
 func main() {
 	plugin.Start(new(SIUsageReport))
+}
+
+func (s *SIUsageReport) GenerateReport(serviceInstances []cfapihelper.ServiceInstance_Details) []Org {
+	var report []Org
+	for _, si := range serviceInstances {
+		switch si.Service {
+		case "p.mysql", "p.redis", "p.pcc", "p.rabbit":
+			newOrg := Org{
+				OrgName:              si.Org,
+				SpaceName:            si.Space,
+				ProductName:          si.Service,
+				PlanName:             si.Plan,
+				ServiceInstanceCount: 1,
+			}
+			report = append(report, newOrg)
+		}
+
+	}
+	return report
 }
