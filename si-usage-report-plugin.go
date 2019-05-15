@@ -68,7 +68,7 @@ func (s *SIUsageReport) GetSIUsageReport(args []string) {
 			fmt.Fprint(s.OutBuf, string(sisJSON))
 		}
 	} else {
-		fmt.Fprint(s.OutBuf, "need to log in")
+		fmt.Fprint(s.OutBuf, "error: not logged in.\n run cf login")
 	}
 }
 

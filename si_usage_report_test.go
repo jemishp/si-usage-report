@@ -103,7 +103,7 @@ var _ bool = Describe("SiUsageReport", func() {
 				})
 				It("asks user to log in", func() {
 					subject.GetSIUsageReport([]string{"test"})
-					Expect(outBuffer).To(gbytes.Say("need to log in"))
+					Expect(outBuffer).To(gbytes.Say("error: not logged in.\n run cf login"))
 				})
 			})
 			When("user is logged in", func() {
@@ -140,7 +140,7 @@ var _ bool = Describe("SiUsageReport", func() {
 						Expect(err).NotTo(HaveOccurred())
 						Expect(expectedSIJSON).ToNot(BeNil())
 					})
-					It("retrieves service instance details ", func() {
+					It("prints service instance details in json", func() {
 						subject.GetSIUsageReport([]string{"test"})
 						Expect(outBuffer).To(gbytes.Say(string(expectedSIJSON)))
 					})
