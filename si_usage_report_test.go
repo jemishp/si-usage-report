@@ -118,8 +118,9 @@ var _ bool = Describe("SiUsageReport", func() {
 						Expect(outBuffer).To(gbytes.Say("error while getting service instances: CF API returned no output"))
 					})
 				})
-				When("service instances are returned", func() {
+				When("service instances returned are valid json", func() {
 					var expectedSIJSON []byte
+					var err error
 					BeforeEach(func() {
 						fakeCLIConnection.IsLoggedInReturns(true, nil)
 						fakeapiHelper = fakes.FakeAPIHelper{
@@ -130,19 +131,22 @@ var _ bool = Describe("SiUsageReport", func() {
 						expectedServiceInstance = []cfapihelper.ServiceInstance_Details{
 							{
 								Guid:      "31e3efc1-1898-4156-b936-a666131483e1",
-								Name:      "test-si-1",
-								Plan:      "/v2/service_plans/fd12a21d-6667-4150-8193-884d083b7874",
-								Service:   "/v2/services/5e30ff7e-d857-4aa7-9eda-7db9a0d7b19b",
+								Name:      "test-si-2",
+								Org:       "test-org",
+								Space:     "test-space",
+								Plan:      "spark",
+								Service:   "cleardb",
 								Type:      "managed_service_instance",
 								CreatedAt: time.Date(2019, 05, 06, 21, 18, 47, 0, time.UTC),
 							}}
-						expectedSIJSON, err := json.Marshal(expectedServiceInstance)
+						expectedSIJSON, err = json.Marshal(expectedServiceInstance)
 						Expect(err).NotTo(HaveOccurred())
 						Expect(expectedSIJSON).ToNot(BeNil())
 					})
 					It("prints service instance details in json", func() {
 						subject.GetSIUsageReport([]string{"test"})
-						Expect(outBuffer).To(gbytes.Say(string(expectedSIJSON)))
+						outJSON := outBuffer.(*gbytes.Buffer).Contents()
+						Expect(outJSON).Should(MatchJSON(expectedSIJSON))
 					})
 
 				})
