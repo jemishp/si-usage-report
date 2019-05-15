@@ -65,7 +65,7 @@ func (s *SIUsageReport) GetSIUsageReport(args []string) {
 			if err != nil {
 				fmt.Fprintf(s.OutBuf, "error converting to json: %s", err.Error())
 			}
-			fmt.Fprintf(s.OutBuf, "service-instances: %s", sisJSON)
+			fmt.Fprint(s.OutBuf, string(sisJSON))
 		}
 	} else {
 		fmt.Fprint(s.OutBuf, "need to log in")
