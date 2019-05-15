@@ -24,71 +24,6 @@ var _ = Describe("cfapiHelper", func() {
 			apiHelper = cfapihelper.New(fakeClientConnection)
 		})
 
-		Context("2 orgs exist", func() {
-			var orgsJSON []string
-
-			BeforeEach(func() {
-				orgsJSON = getResponse("test-data/orgs.json")
-				fakeClientConnection.CliCommandWithoutTerminalOutputReturns(orgsJSON, nil)
-			})
-			It("should return 2 orgs", func() {
-				orgs, err := apiHelper.GetOrgs()
-				Expect(err).NotTo(HaveOccurred())
-				Expect(len(orgs)).To(Equal(2))
-			})
-		})
-		Context("26 services exist", func() {
-			var servicesJSON []string
-
-			BeforeEach(func() {
-				servicesJSON = getResponse("test-data/services.json")
-				fakeClientConnection.CliCommandWithoutTerminalOutputReturns(servicesJSON, nil)
-			})
-			It("should return list of services", func() {
-				services, err := apiHelper.GetServices()
-				Expect(err).NotTo(HaveOccurred())
-				Expect(len(services)).To(Equal(26))
-			})
-		})
-		Context("100 service plans exist", func() {
-			var servicePlansJSON []string
-
-			BeforeEach(func() {
-				servicePlansJSON = getResponse("test-data/service-plans.json")
-				fakeClientConnection.CliCommandWithoutTerminalOutputReturns(servicePlansJSON, nil)
-			})
-			It("should return list of service plans", func() {
-				services, err := apiHelper.GetServicePlans()
-				Expect(err).NotTo(HaveOccurred())
-				Expect(len(services)).To(Equal(100))
-			})
-		})
-		Context("2 service instances exist", func() {
-			var serviceInstancesJSON []string
-
-			BeforeEach(func() {
-				serviceInstancesJSON = getResponse("test-data/service-instances.json")
-				fakeClientConnection.CliCommandWithoutTerminalOutputReturns(serviceInstancesJSON, nil)
-			})
-			It("should return list of service instances", func() {
-				serviceInstances, err := apiHelper.GetServiceInstances()
-				Expect(err).NotTo(HaveOccurred())
-				Expect(len(serviceInstances)).To(Equal(2))
-			})
-		})
-		Context("a lot of service instances are returned across multiple pages", func() {
-			var serviceInstancesJSON []string
-
-			BeforeEach(func() {
-				serviceInstancesJSON = getResponse("test-data/many-service-instances.json")
-				fakeClientConnection.CliCommandWithoutTerminalOutputReturns(serviceInstancesJSON, nil)
-			})
-			It("should return list of service instances", func() {
-				serviceInstances, err := apiHelper.GetServiceInstances()
-				Expect(err).NotTo(HaveOccurred())
-				Expect(len(serviceInstances)).To(Equal(41600))
-			})
-		})
 		Context("2 service instances with details exist", func() {
 			var serviceInstancesJSON []string
 			var expectedServiceInstances []cfapihelper.ServiceInstance_Details
@@ -126,32 +61,6 @@ var _ = Describe("cfapiHelper", func() {
 				Expect(serviceInstances).To(Equal(expectedServiceInstances))
 			})
 		})
-		Context("getting the plan name for a service instance", func() {
-			var serviceInstancePlanDetailsJSON []string
-
-			BeforeEach(func() {
-				serviceInstancePlanDetailsJSON = getResponse("test-data/si-plan-details.json")
-				fakeClientConnection.CliCommandWithoutTerminalOutputReturns(serviceInstancePlanDetailsJSON, nil)
-			})
-			It("returns service plan name of the service instance", func() {
-				serviceInstancePlanName, err := apiHelper.GetServiceInstancePlanDetails("test")
-				Expect(err).NotTo(HaveOccurred())
-				Expect(serviceInstancePlanName).To(Equal("spark"))
-			})
-		})
-		Context("getting the service name for a service instance", func() {
-			var serviceInstanceServiceDetailsJSON []string
-
-			BeforeEach(func() {
-				serviceInstanceServiceDetailsJSON = getResponse("test-data/si-service-details.json")
-				fakeClientConnection.CliCommandWithoutTerminalOutputReturns(serviceInstanceServiceDetailsJSON, nil)
-			})
-			It("returns service plan name of the service instance", func() {
-				serviceInstanceServiceName, err := apiHelper.GetServiceInstanceServiceDetails("test")
-				Expect(err).NotTo(HaveOccurred())
-				Expect(serviceInstanceServiceName).To(Equal("cleardb"))
-			})
-		})
 	})
 	Describe("testing error cases", func() {
 		var (
@@ -169,7 +78,7 @@ var _ = Describe("cfapiHelper", func() {
 					errors.New("really bad error"))
 			})
 			It("should return an error", func() {
-				returned, err := apiHelper.GetOrgs()
+				returned, err := apiHelper.GetServiceInstancesWithDetails()
 				Expect(err).To(MatchError("really bad error"))
 				Expect(len(returned)).To(Equal(0))
 			})
@@ -182,84 +91,6 @@ var _ = Describe("cfapiHelper", func() {
 				returned, err := apiHelper.IsLoggedIn()
 				Expect(err).To(MatchError("really bad login error"))
 				Expect(returned).To(Equal(false))
-			})
-		})
-		Context("no orgs exist", func() {
-			var orgsJSON []string
-
-			BeforeEach(func() {
-				orgsJSON = getResponse("test-data/no-orgs.json")
-				fakeClientConnection.CliCommandWithoutTerminalOutputReturns(orgsJSON, nil)
-			})
-			It("should return an error", func() {
-				orgs, err := apiHelper.GetOrgs()
-				Expect(err).To(MatchError("CF API returned no output"))
-				Expect(len(orgs)).To(Equal(0))
-			})
-		})
-		Context("no services exist", func() {
-			var servicesJSON []string
-
-			BeforeEach(func() {
-				servicesJSON = getResponse("test-data/no-services.json")
-				fakeClientConnection.CliCommandWithoutTerminalOutputReturns(servicesJSON, nil)
-			})
-			It("should return an error", func() {
-				services, err := apiHelper.GetServices()
-				Expect(err).To(MatchError("CF API returned no output"))
-				Expect(len(services)).To(Equal(0))
-			})
-		})
-		Context("no service plans exist", func() {
-			var servicePlansJSON []string
-
-			BeforeEach(func() {
-				servicePlansJSON = getResponse("test-data/no-service-plans.json")
-				fakeClientConnection.CliCommandWithoutTerminalOutputReturns(servicePlansJSON, nil)
-			})
-			It("should return an error", func() {
-				services, err := apiHelper.GetServicePlans()
-				Expect(err).To(MatchError("CF API returned no output"))
-				Expect(len(services)).To(Equal(0))
-			})
-		})
-		Context("no service instances exist", func() {
-			var serviceInstancesJSON []string
-
-			BeforeEach(func() {
-				serviceInstancesJSON = getResponse("test-data/no-service-instances.json")
-				fakeClientConnection.CliCommandWithoutTerminalOutputReturns(serviceInstancesJSON, nil)
-			})
-			It("should return an error", func() {
-				serviceInstances, err := apiHelper.GetServiceInstances()
-				Expect(err).To(MatchError("CF API returned no output"))
-				Expect(len(serviceInstances)).To(Equal(0))
-			})
-		})
-		Context("no plan name for a service instance exists", func() {
-			var serviceInstancePlanDetailsJSON []string
-
-			BeforeEach(func() {
-				serviceInstancePlanDetailsJSON = getResponse("test-data/no-si-plan-details.json")
-				fakeClientConnection.CliCommandWithoutTerminalOutputReturns(serviceInstancePlanDetailsJSON, nil)
-			})
-			It("should return list of service instances", func() {
-				serviceInstancePlanName, err := apiHelper.GetServiceInstancePlanDetails("test")
-				Expect(err).To(MatchError("CF API returned no output"))
-				Expect(serviceInstancePlanName).To(Equal(""))
-			})
-		})
-		Context("no service name for a service instance exists", func() {
-			var serviceInstanceServiceDetailsJSON []string
-
-			BeforeEach(func() {
-				serviceInstanceServiceDetailsJSON = getResponse("test-data/no-si-plan-details.json")
-				fakeClientConnection.CliCommandWithoutTerminalOutputReturns(serviceInstanceServiceDetailsJSON, nil)
-			})
-			It("should return list of service instances", func() {
-				serviceInstanceServiceName, err := apiHelper.GetServiceInstanceServiceDetails("test")
-				Expect(err).To(MatchError("CF API returned no output"))
-				Expect(serviceInstanceServiceName).To(Equal(""))
 			})
 		})
 	})
