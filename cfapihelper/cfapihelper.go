@@ -34,7 +34,7 @@ func New(cliConnection plugin.CliConnection) CFAPIHelper {
 func (a *APIHelper) GetServiceInstancesWithDetails() ([]ServiceInstance_Details, error) {
 	queryPath := "/v2/service_instances?q=&inline-relations-depth=2&" +
 		"exclude-relations=developers,managers,auditors,domains,security_groups,staging_security_groups," +
-		"apps,routes,service_keys"
+		"apps,routes,service_keys,service_bindings,app,service_binding"
 	serviceInstanceDetailsJSON, err := cfcurl.Curl(a.cliConnection, queryPath)
 	if err != nil {
 		return nil, err
