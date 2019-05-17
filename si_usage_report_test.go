@@ -29,7 +29,7 @@ var _ bool = Describe("SiUsageReport", func() {
 			apiHelper               cfapihelper.CFAPIHelper
 			fakeapiHelper           fakes.FakeAPIHelper
 			expectedServiceInstance []cfapihelper.ServiceInstance_Details
-			expectedReport          []Org
+			expectedReport          Report
 		)
 
 		BeforeEach(func() {
@@ -145,8 +145,8 @@ var _ bool = Describe("SiUsageReport", func() {
 						Expect(expectedSIJSON).ToNot(BeNil())
 					})
 					It("returns an empty list", func() {
-						orgList := subject.GenerateReport(expectedServiceInstance)
-						Expect(len(orgList)).To(Equal(0))
+						report := subject.GenerateReport(expectedServiceInstance)
+						Expect(len(report.Products)).To(Equal(0))
 					})
 				})
 				When("service instances returned are p.redis, p.pcc, p.mysql or p.rabbit", func() {
@@ -159,34 +159,44 @@ var _ bool = Describe("SiUsageReport", func() {
 						}
 						subject.APIHelper = &fakeapiHelper
 						subject.CliConnection = fakeCLIConnection
-						expectedReport = []Org{
-							{
-								OrgName:              "test-org",
-								SpaceName:            "test-space",
-								ProductName:          "p.mysql",
-								PlanName:             "spark",
-								ServiceInstanceCount: 1,
-							},
-							{
-								OrgName:              "test-org",
-								SpaceName:            "test-space",
-								ProductName:          "p.pcc",
-								PlanName:             "spark",
-								ServiceInstanceCount: 1,
-							},
-							{
-								OrgName:              "test-org",
-								SpaceName:            "test-space",
-								ProductName:          "p.redis",
-								PlanName:             "spark",
-								ServiceInstanceCount: 1,
-							},
-							{
-								OrgName:              "test-org",
-								SpaceName:            "test-space",
-								ProductName:          "p.rabbit",
-								PlanName:             "spark",
-								ServiceInstanceCount: 1,
+						expectedReport = Report{
+							Products: []Product{
+								{
+									Name:  "p.mysql",
+									Plans: []Plan{
+										{
+											PlanName:      "10mb",
+											InstanceCount: 3,
+										},
+									},
+								},
+								{
+									Name:  "p.pcc",
+									Plans: []Plan{
+										{
+											PlanName:      "small",
+											InstanceCount: 1,
+										},
+									},
+								},
+								{
+									Name:  "p.rabbit",
+									Plans: []Plan{
+										{
+											PlanName:      "lemur",
+											InstanceCount: 2,
+										},
+									},
+								},
+								{
+									Name:  "p.redis",
+									Plans: []Plan{
+										{
+											PlanName:      "medium",
+											InstanceCount: 1,
+										},
+									},
+								},
 							},
 						}
 						expectedSIJSON, err = json.Marshal(expectedReport)

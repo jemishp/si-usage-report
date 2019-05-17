@@ -7,6 +7,7 @@ import (
 	"github.com/jpatel-pivotal/si-usage-report/cfapihelper"
 	"io"
 	"os"
+	"sort"
 )
 
 type SIUsageReport struct {
@@ -16,15 +17,27 @@ type SIUsageReport struct {
 }
 
 type Report struct {
-	Orgs []Org
+	Products []Product
 }
 
 type Org struct {
-	OrgName              string
-	SpaceName            string
-	ProductName          string
-	PlanName             string
-	ServiceInstanceCount int
+	OrgName string
+	Spaces  []Space
+}
+
+type Space struct {
+	Name     string
+	Products []Product
+}
+
+type Product struct {
+	Name  string
+	Plans []Plan
+}
+
+type Plan struct {
+	PlanName      string
+	InstanceCount int
 }
 
 func (s *SIUsageReport) Run(cliConnection plugin.CliConnection, args []string) {
@@ -89,21 +102,75 @@ func main() {
 	plugin.Start(new(SIUsageReport))
 }
 
-func (s *SIUsageReport) GenerateReport(serviceInstances []cfapihelper.ServiceInstance_Details) []Org {
-	var report []Org
+func (s *SIUsageReport) GenerateReport(serviceInstances []cfapihelper.ServiceInstance_Details) Report {
+	var report Report
+	report = Report{}
+	prodMap := make(map[string]interface{})
+	planMap := make(map[string][]Plan)
+	spaceMap := make(map[string]interface{})
+	orgMap := make(map[string]interface{})
+
 	for _, si := range serviceInstances {
 		switch si.Service {
 		case "p.mysql", "p.redis", "p.pcc", "p.rabbit":
-			newOrg := Org{
-				OrgName:              si.Org,
-				SpaceName:            si.Space,
-				ProductName:          si.Service,
-				PlanName:             si.Plan,
-				ServiceInstanceCount: 1,
-			}
-			report = append(report, newOrg)
-		}
+			if _, ok := planMap[si.Plan]; !ok {
+				planMap[si.Plan] = []Plan{
+					{
+						PlanName:      si.Plan,
+						InstanceCount: +1,
+					},
+				}
+			} else {
+				for _, plan := range planMap[si.Plan] {
+					if plan.PlanName == si.Plan {
+						plan.InstanceCount += 1
+						planMap[si.Plan] = []Plan{plan}
+					}
+				}
 
+			}
+			if _, ok := prodMap[si.Service]; !ok {
+				prodMap[si.Service] = []Product{
+					{
+						Name:  si.Service,
+						Plans: planMap[si.Plan],
+					},
+				}
+			}
+
+			if _, ok := spaceMap[si.Space]; !ok {
+				spaceMap[si.Space] = []Space{
+					{
+						Name:     si.Space,
+						Products: prodMap[si.Service].([]Product),
+					},
+				}
+			}
+			if _, ok := orgMap[si.Org]; !ok {
+				orgMap[si.Org] = []Org{
+					{
+						OrgName: si.Org,
+						Spaces:  spaceMap[si.Space].([]Space),
+					},
+				}
+			}
+
+			prodMap[si.Service] = planMap[si.Plan]
+
+		}
 	}
+	productKeys := make([]string, 0, len(prodMap))
+	for a,_ := range prodMap{
+		productKeys = append(productKeys, a)
+	}
+	sort.Strings(productKeys)
+	for _,productKey := range productKeys {
+		newProduct := Product{
+			Name:  productKey,
+			Plans: prodMap[productKey].([]Plan),
+		}
+		report.Products = append(report.Products, newProduct)
+	}
+
 	return report
 }
