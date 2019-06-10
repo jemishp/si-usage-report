@@ -4,6 +4,7 @@ import (
 	"code.cloudfoundry.org/cli/plugin"
 	"code.cloudfoundry.org/cli/plugin/pluginfakes"
 	"encoding/json"
+	"fmt"
 	. "github.com/jpatel-pivotal/si-usage-report"
 	"github.com/jpatel-pivotal/si-usage-report/cfapihelper"
 	"github.com/jpatel-pivotal/si-usage-report/cfapihelper/fakes"
@@ -13,7 +14,6 @@ import (
 	"github.com/onsi/gomega/gexec"
 	"io"
 	"os/exec"
-	"time"
 )
 
 var _ bool = Describe("SiUsageReport", func() {
@@ -77,6 +77,12 @@ var _ bool = Describe("SiUsageReport", func() {
 		})
 		//TODO Move this to integration test
 		Context("cf si-usage-report is run without installing the plugin", func() {
+			BeforeEach(func() {
+				args :=[]string{"uninstall-plugin", "si-usage-report"}
+				session, err := gexec.Start(exec.Command("cf", args...), outBuffer, errBuffer)
+				session.Wait()
+				Expect(err).NotTo(HaveOccurred())
+			})
 			subject = new(SIUsageReport)
 			fakeCLIConnection = &pluginfakes.FakeCliConnection{}
 			apiHelper = cfapihelper.New(fakeCLIConnection)
@@ -129,23 +135,14 @@ var _ bool = Describe("SiUsageReport", func() {
 						}
 						subject.APIHelper = &fakeapiHelper
 						subject.CliConnection = fakeCLIConnection
-						expectedServiceInstance = []cfapihelper.ServiceInstance_Details{
-							{
-								Guid:      "31e3efc1-1898-4156-b936-a666131483e1",
-								Name:      "test-si-2",
-								Org:       "test-org",
-								Space:     "test-space",
-								Plan:      "spark",
-								Service:   "cleardb",
-								Type:      "managed_service_instance",
-								CreatedAt: time.Date(2019, 05, 06, 21, 18, 47, 0, time.UTC),
-							}}
+						expectedServiceInstance = []cfapihelper.ServiceInstance_Details{}
 						expectedSIJSON, err = json.Marshal(expectedServiceInstance)
 						Expect(err).NotTo(HaveOccurred())
 						Expect(expectedSIJSON).ToNot(BeNil())
 					})
 					It("returns an empty list", func() {
 						report := subject.GenerateReport(expectedServiceInstance)
+						fmt.Println(report)
 						Expect(len(report.Products)).To(Equal(0))
 					})
 				})
@@ -162,16 +159,20 @@ var _ bool = Describe("SiUsageReport", func() {
 						expectedReport = Report{
 							Products: []Product{
 								{
-									Name:  "p.mysql",
+									Name: "p.mysql",
 									Plans: []Plan{
 										{
 											PlanName:      "10mb",
 											InstanceCount: 3,
 										},
+										{
+											PlanName:      "100mb",
+											InstanceCount: 1,
+										},
 									},
 								},
 								{
-									Name:  "p.pcc",
+									Name: "p.pcc",
 									Plans: []Plan{
 										{
 											PlanName:      "small",
@@ -180,7 +181,7 @@ var _ bool = Describe("SiUsageReport", func() {
 									},
 								},
 								{
-									Name:  "p.rabbit",
+									Name: "p.rabbit",
 									Plans: []Plan{
 										{
 											PlanName:      "lemur",
@@ -189,7 +190,7 @@ var _ bool = Describe("SiUsageReport", func() {
 									},
 								},
 								{
-									Name:  "p.redis",
+									Name: "p.redis",
 									Plans: []Plan{
 										{
 											PlanName:      "medium",
@@ -209,6 +210,58 @@ var _ bool = Describe("SiUsageReport", func() {
 						Expect(outJSON).Should(MatchJSON(expectedSIJSON))
 					})
 
+				})
+				When("a lot of service instances of type p.redis, p.pcc, p.mysql or p.rabbit are returned", func() {
+					var expectedSIJSON []byte
+					var serviceInstancesJSON []string
+					var err error
+					BeforeEach(func() {
+						fakeCLIConnection.IsLoggedInReturns(true, nil)
+						serviceInstancesJSON = fakeapiHelper.GetResponse("cfapihelper/test-data/lot-of-service-instances.json")
+						fakeCLIConnection.CliCommandWithoutTerminalOutputReturns(serviceInstancesJSON, nil)
+						newAPIHelper := cfapihelper.New(fakeCLIConnection)
+						subject.APIHelper = newAPIHelper
+						subject.CliConnection = fakeCLIConnection
+						expectedReport = Report{
+							Products: []Product{
+								{
+									Name: "p.mysql",
+									Plans: []Plan{
+										{
+											PlanName:      "panda",
+											InstanceCount: 1654,
+										},
+										{
+											PlanName:      "turtle",
+											InstanceCount: 6616,
+										},
+										{
+											PlanName:      "hippo",
+											InstanceCount: 827,
+										},
+									},
+								},
+							},
+						}
+						expectedSIJSON, err = json.Marshal(expectedReport)
+						Expect(err).NotTo(HaveOccurred())
+						Expect(expectedSIJSON).ToNot(BeNil())
+					})
+					It("prints service instance list in json", func() {
+						subject.GetSIUsageReport([]string{"test"})
+						outJSON := outBuffer.(*gbytes.Buffer).Contents()
+						Expect(outJSON).Should(MatchJSON(expectedSIJSON))
+					})
+					Measure("it should do this efficiently", func(b Benchmarker) {
+						runtime := b.Time("runtime", func() {
+							subject.GetSIUsageReport([]string{"test"})
+
+						})
+
+						Ω(runtime.Seconds()).Should(BeNumerically("<", 7), "GetSIUsageReport() shouldn't take too long.")
+
+						//b.RecordValue("disk usage (in MB)", HowMuchDiskSpaceDidYouUse())
+					}, 10)
 				})
 			})
 		})

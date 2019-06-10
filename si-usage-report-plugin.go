@@ -80,6 +80,7 @@ func (s *SIUsageReport) GetSIUsageReport(args []string) {
 	logedIn, err := s.APIHelper.IsLoggedIn()
 	if err != nil {
 		fmt.Fprintf(s.OutBuf, "error checking login status: %s", err.Error())
+		return
 	}
 	if logedIn {
 		sis, err := s.APIHelper.GetServiceInstancesWithDetails()
@@ -105,69 +106,48 @@ func main() {
 func (s *SIUsageReport) GenerateReport(serviceInstances []cfapihelper.ServiceInstance_Details) Report {
 	var report Report
 	report = Report{}
-	prodMap := make(map[string]interface{})
-	planMap := make(map[string][]Plan)
-	spaceMap := make(map[string]interface{})
-	orgMap := make(map[string]interface{})
+	planMap := make(map[string][]Plan, 0)
 
 	for _, si := range serviceInstances {
-		switch si.Service {
-		case "p.mysql", "p.redis", "p.pcc", "p.rabbit":
-			if _, ok := planMap[si.Plan]; !ok {
-				planMap[si.Plan] = []Plan{
-					{
-						PlanName:      si.Plan,
-						InstanceCount: +1,
-					},
+		if _, ok := planMap[si.Service]; !ok {
+			planMap[si.Service] = []Plan{
+				{
+					PlanName:      si.Plan,
+					InstanceCount: +1,
+				},
+			}
+		} else {
+			var planModified bool
+			planModified = false
+			for k, plan := range planMap[si.Service] {
+				if plan.PlanName == si.Plan {
+					plan.InstanceCount += 1
+					planMap[si.Service][k] = plan
+					planModified = true
 				}
-			} else {
-				for _, plan := range planMap[si.Plan] {
-					if plan.PlanName == si.Plan {
-						plan.InstanceCount += 1
-						planMap[si.Plan] = []Plan{plan}
-					}
-				}
+			}
+			if !planModified {
 
-			}
-			if _, ok := prodMap[si.Service]; !ok {
-				prodMap[si.Service] = []Product{
-					{
-						Name:  si.Service,
-						Plans: planMap[si.Plan],
-					},
+				plan := Plan{
+					PlanName:      si.Plan,
+					InstanceCount: +1,
 				}
+				planMap[si.Service] = append(planMap[si.Service], plan)
 			}
-
-			if _, ok := spaceMap[si.Space]; !ok {
-				spaceMap[si.Space] = []Space{
-					{
-						Name:     si.Space,
-						Products: prodMap[si.Service].([]Product),
-					},
-				}
-			}
-			if _, ok := orgMap[si.Org]; !ok {
-				orgMap[si.Org] = []Org{
-					{
-						OrgName: si.Org,
-						Spaces:  spaceMap[si.Space].([]Space),
-					},
-				}
-			}
-
-			prodMap[si.Service] = planMap[si.Plan]
 
 		}
+
+
 	}
-	productKeys := make([]string, 0, len(prodMap))
-	for a,_ := range prodMap{
+	productKeys := make([]string, 0, len(planMap))
+	for a, _ := range planMap {
 		productKeys = append(productKeys, a)
 	}
 	sort.Strings(productKeys)
-	for _,productKey := range productKeys {
+	for _, productKey := range productKeys {
 		newProduct := Product{
 			Name:  productKey,
-			Plans: prodMap[productKey].([]Plan),
+			Plans: planMap[productKey],
 		}
 		report.Products = append(report.Products, newProduct)
 	}

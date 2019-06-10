@@ -1,18 +1,22 @@
 package fakes
 
 import (
+	"bufio"
 	"code.cloudfoundry.org/cli/plugin/pluginfakes"
+	"fmt"
 	"github.com/jpatel-pivotal/si-usage-report/cfapihelper"
-	"time"
+	"os"
 )
 
 type FakeAPIHelper struct {
-	CliConnection *pluginfakes.FakeCliConnection
+	CliConnection       *pluginfakes.FakeCliConnection
+	GetResponseFromFile bool
 }
 
 type CFAPIHelper interface {
 	GetServiceInstancesWithDetails() ([]cfapihelper.ServiceInstance_Details, error)
 	IsLoggedIn() (bool, error)
+	GetResponse(filename string) []string
 }
 
 var _ cfapihelper.CFAPIHelper = new(FakeAPIHelper)
@@ -24,40 +28,40 @@ func (f *FakeAPIHelper) GetServiceInstancesWithDetails() ([]cfapihelper.ServiceI
 			Name:      "test-si-1",
 			Org:       "test-org",
 			Space:     "test-space",
-			Plan:      "spark",
-			Service:   "cleardb",
+			Plan:      "10mb",
+			Service:   "p.mysql",
 			Type:      "managed_service_instance",
-			CreatedAt: time.Date(2019, 05, 06, 21, 18, 47, 0, time.UTC),
+			CreatedAt: "2018-02-21 23:30:26",
 		},
 		{
 			Guid:      "31e3efc1-1898-4156-b936-a666131483e1",
 			Name:      "test-si-2",
 			Org:       "test-org",
 			Space:     "test-space",
-			Plan:      "10mb",
-			Service:   "p.mysql",
+			Plan:      "small",
+			Service:   "p.pcc",
 			Type:      "managed_service_instance",
-			CreatedAt: time.Date(2019, 05, 06, 21, 18, 47, 0, time.UTC),
+			CreatedAt: "2018-02-21 23:30:26",
 		},
 		{
 			Guid:      "31e3efc1-1898-4156-b936-a666131483e1",
 			Name:      "test-si-3",
 			Org:       "test-org",
 			Space:     "test-space",
-			Plan:      "small",
-			Service:   "p.pcc",
+			Plan:      "medium",
+			Service:   "p.redis",
 			Type:      "managed_service_instance",
-			CreatedAt: time.Date(2019, 05, 06, 21, 18, 47, 0, time.UTC),
+			CreatedAt: "2018-02-21 23:30:26",
 		},
 		{
 			Guid:      "31e3efc1-1898-4156-b936-a666131483e1",
 			Name:      "test-si-4",
 			Org:       "test-org",
 			Space:     "test-space",
-			Plan:      "medium",
-			Service:   "p.redis",
+			Plan:      "lemur",
+			Service:   "p.rabbit",
 			Type:      "managed_service_instance",
-			CreatedAt: time.Date(2019, 05, 06, 21, 18, 47, 0, time.UTC),
+			CreatedAt: "2018-02-21 23:30:26",
 		},
 		{
 			Guid:      "31e3efc1-1898-4156-b936-a666131483e1",
@@ -67,17 +71,17 @@ func (f *FakeAPIHelper) GetServiceInstancesWithDetails() ([]cfapihelper.ServiceI
 			Plan:      "lemur",
 			Service:   "p.rabbit",
 			Type:      "managed_service_instance",
-			CreatedAt: time.Date(2019, 05, 06, 21, 18, 47, 0, time.UTC),
+			CreatedAt: "2018-02-21 23:30:26",
 		},
 		{
 			Guid:      "31e3efc1-1898-4156-b936-a666131483e1",
 			Name:      "test-si-6",
 			Org:       "test-org",
 			Space:     "test-space",
-			Plan:      "lemur",
-			Service:   "p.rabbit",
+			Plan:      "10mb",
+			Service:   "p.mysql",
 			Type:      "managed_service_instance",
-			CreatedAt: time.Date(2019, 05, 06, 21, 18, 47, 0, time.UTC),
+			CreatedAt: "2018-02-21 23:30:26",
 		},
 		{
 			Guid:      "31e3efc1-1898-4156-b936-a666131483e1",
@@ -87,21 +91,35 @@ func (f *FakeAPIHelper) GetServiceInstancesWithDetails() ([]cfapihelper.ServiceI
 			Plan:      "10mb",
 			Service:   "p.mysql",
 			Type:      "managed_service_instance",
-			CreatedAt: time.Date(2019, 05, 06, 21, 18, 47, 0, time.UTC),
+			CreatedAt: "2018-02-21 23:30:26",
 		},
 		{
 			Guid:      "31e3efc1-1898-4156-b936-a666131483e1",
 			Name:      "test-si-8",
 			Org:       "test-org",
 			Space:     "test-space",
-			Plan:      "10mb",
+			Plan:      "100mb",
 			Service:   "p.mysql",
 			Type:      "managed_service_instance",
-			CreatedAt: time.Date(2019, 05, 06, 21, 18, 47, 0, time.UTC),
+			CreatedAt: "2018-02-21 23:30:26",
 		},
 	}, nil
 }
 
 func (f *FakeAPIHelper) IsLoggedIn() (bool, error) {
 	return true, nil
+}
+
+func (f *FakeAPIHelper) GetResponse(filename string) []string {
+	var b []string
+	file, err := os.Open(filename)
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+	defer file.Close()
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		b = append(b, scanner.Text())
+	}
+	return b
 }

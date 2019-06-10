@@ -9,7 +9,6 @@ import (
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"os"
-	"time"
 )
 
 var _ = Describe("cfapiHelper", func() {
@@ -24,7 +23,7 @@ var _ = Describe("cfapiHelper", func() {
 			apiHelper = cfapihelper.New(fakeClientConnection)
 		})
 
-		Context("2 service instances with details exist", func() {
+		Context("4 service instances with details are returned", func() {
 			var serviceInstancesJSON []string
 			var expectedServiceInstances []cfapihelper.ServiceInstance_Details
 
@@ -33,123 +32,78 @@ var _ = Describe("cfapiHelper", func() {
 				fakeClientConnection.CliCommandWithoutTerminalOutputReturns(serviceInstancesJSON, nil)
 				expectedServiceInstances = []cfapihelper.ServiceInstance_Details{
 					{
-						Guid: "2f7f9ddb-0c1b-4198-b164-081f3f05f059",
-						Name: "test-upgrade",
-						Org: "dedicated-mysql-dev",
-						Space: "staging",
-						Plan: "db-small",
-						Service: "p.mysql-staging",
-						Type: "managed_service_instance",
-						CreatedAt: time.Date(2017, 04, 18, 18, 44, 16, 0, time.UTC),
+						Guid:      "168f3d45-1e11-4966-9fdc-b52632f00fba",
+						Name:      "datadog-metrics-work-alerting",
+						Org:       "dedicated-mysql-dev",
+						Space:     "acceptance",
+						Plan:      "db-lf-small",
+						Service:   "p.mysql",
+						Type:      "managed_service_instance",
+						CreatedAt: "2017-09-07T20:55:22Z",
 					},
 					{
-						Guid: "168f3d45-1e11-4966-9fdc-b52632f00fba",
-						Name: "datadog-metrics-work-alerting",
-						Org: "dedicated-mysql-dev",
-						Space: "acceptance",
-						Plan: "db-lf-small",
-						Service: "p.mysql",
-						Type: "managed_service_instance",
-						CreatedAt: time.Date(2017, 9, 07, 20, 55, 22, 0, time.UTC),
+						Guid:      "6ce0a8d2-c23f-47ca-9252-1a98be6543b3",
+						Name:      "migrate1",
+						Org:       "dedicated-mysql-dev",
+						Space:     "acceptance",
+						Plan:      "db-small",
+						Service:   "p.mysql",
+						Type:      "managed_service_instance",
+						CreatedAt: "2018-02-21T23:30:26Z",
 					},
 					{
-						Guid: "250468d8-be73-475e-bb1e-e62d28b46b08",
-						Name: "test-lf-upgrade",
-						Org: "dedicated-mysql-dev",
-						Space: "staging",
-						Plan: "db-lf-small",
-						Service: "p.mysql-staging",
-						Type: "managed_service_instance",
-						CreatedAt: time.Date(2017, 11, 27, 23, 07, 37, 0, time.UTC),
+						Guid:      "6e4f3b2d-503d-4ed7-b0f8-85511ae93a7f",
+						Name:      "to",
+						Org:       "dedicated-mysql-dev",
+						Space:     "acceptance",
+						Plan:      "db-small",
+						Service:   "p.mysql",
+						Type:      "managed_service_instance",
+						CreatedAt: "2018-03-12T19:04:26Z",
 					},
 					{
-						Guid: "6ce0a8d2-c23f-47ca-9252-1a98be6543b3",
-						Name: "migrate1",
-						Org: "dedicated-mysql-dev",
-						Space: "acceptance",
-						Plan: "db-small",
-						Service: "p.mysql",
-						Type: "managed_service_instance",
-						CreatedAt: time.Date(2018, 02, 21, 23, 30, 26, 0, time.UTC),
-					},
-					{
-						Guid: "b5c56b9e-5151-4e6d-a0e5-367df389a132",
-						Name: "from",
-						Org: "dedicated-mysql-dev",
-						Space: "acceptance",
-						Plan: "1gb",
-						Service: "p-mysql",
-						Type: "managed_service_instance",
-						CreatedAt: time.Date(2018, 02, 21, 23, 37, 25, 0, time.UTC),
-					},
-					{
-						Guid: "6e4f3b2d-503d-4ed7-b0f8-85511ae93a7f",
-						Name: "to",
-						Org: "dedicated-mysql-dev",
-						Space: "acceptance",
-						Plan: "db-small",
-						Service: "p.mysql",
-						Type: "managed_service_instance",
-						CreatedAt: time.Date(2018, 03, 12, 19, 04, 26, 0, time.UTC),
-					},
-					{
-						Guid: "da68e757-390c-41e2-bb5c-c4afeed5a0cc",
-						Name: "migrate-test-staging",
-						Org: "dedicated-mysql-dev",
-						Space: "staging",
-						Plan: "db-small",
-						Service: "p.mysql-staging",
-						Type: "managed_service_instance",
-						CreatedAt: time.Date(2018, 10, 03, 17, 04, 56, 0, time.UTC),
-					},
-					{
-						Guid: "02e65477-1e18-4a23-8bda-fabd5a4ac758",
-						Name: "test-ha-upgrade",
-						Org: "dedicated-mysql-dev",
-						Space: "staging",
-						Plan: "db-ha-small",
-						Service: "p.mysql-staging",
-						Type: "managed_service_instance",
-						CreatedAt: time.Date(2018, 10, 11, 22, 35, 49, 0, time.UTC),
-					},
-					{
-						Guid: "c0ca147f-c84a-4d11-88b1-fed254943a73",
-						Name: "ha-staging-test",
-						Org: "dedicated-mysql-dev",
-						Space: "staging",
-						Plan: "db-ha-small",
-						Service: "p.mysql-staging",
-						Type: "managed_service_instance",
-						CreatedAt: time.Date(2018, 11, 06, 00, 05, 40, 0, time.UTC),
-					},
-					{
-						Guid: "d97fa089-e5c8-4e22-b2da-5ceb49db85f2",
-						Name: "backup-test-ha",
-						Org: "dedicated-mysql-dev",
-						Space: "acceptance",
-						Plan: "db-ha-small",
-						Service: "p.mysql",
-						Type: "managed_service_instance",
-						CreatedAt: time.Date(2019, 05, 01, 18, 56, 01, 0, time.UTC),
-					},
-					{
-						Guid: "31e3efc1-1898-4156-b936-a666131483e1",
-						Name: "test-si",
-						Org: "jpatel-org",
-						Space: "development",
-						Plan: "spark",
-						Service: "cleardb",
-						Type: "managed_service_instance",
-						CreatedAt: time.Date(2019, 05, 06, 21, 18, 47, 0, time.UTC),
+						Guid:      "d97fa089-e5c8-4e22-b2da-5ceb49db85f2",
+						Name:      "backup-test-ha",
+						Org:       "dedicated-mysql-dev",
+						Space:     "acceptance",
+						Plan:      "db-ha-small",
+						Service:   "p.mysql",
+						Type:      "managed_service_instance",
+						CreatedAt: "2019-05-01T18:56:01Z",
 					},
 				}
 			})
 			It("should return list of service instances with details", func() {
 				serviceInstances, err := apiHelper.GetServiceInstancesWithDetails()
 				Expect(err).NotTo(HaveOccurred())
-				Expect(len(serviceInstances)).To(Equal(11))
+				Expect(len(serviceInstances)).To(Equal(4))
 				Expect(serviceInstances).To(Equal(expectedServiceInstances))
 			})
+		})
+		Context("41350 service instances with details exist across pages", func() {
+			var serviceInstancesJSON []string
+
+			BeforeEach(func() {
+				serviceInstancesJSON = getResponse("test-data/lot-of-service-instances.json")
+				fakeClientConnection.CliCommandWithoutTerminalOutputReturns(serviceInstancesJSON, nil)
+			})
+			It("should return list of service instances with details", func() {
+				serviceInstances, err := apiHelper.GetServiceInstancesWithDetails()
+				Expect(err).NotTo(HaveOccurred())
+				Expect(len(serviceInstances)).To(Equal(9097))
+			})
+			Measure("it should do this efficiently", func(b Benchmarker) {
+				runtime := b.Time("runtime", func() {
+					serviceInstances, err := apiHelper.GetServiceInstancesWithDetails()
+					Expect(err).NotTo(HaveOccurred())
+					Expect(len(serviceInstances)).To(Equal(9097))
+				})
+
+				Ω(runtime.Seconds()).Should(BeNumerically("<", 7), "GetServiceInstancesWithDetails() shouldn't take too long.")
+
+				//b.RecordValue("disk usage (in MB)", HowMuchDiskSpaceDidYouUse())
+			}, 10)
+
 		})
 	})
 	Describe("testing error cases", func() {
